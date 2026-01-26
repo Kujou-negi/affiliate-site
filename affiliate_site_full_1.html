@@ -1,0 +1,845 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Good for life | ACアダプター比較サイト</title>
+  <meta name="description" id="metaDesc" content="USB-C充電器を出力・PPS・GaN・折プラグ・ポート数で絞り込み、Amazonと楽天で価格比較できます。" />
+
+  <style>
+   :root{
+  --bg:#0b0f14;
+  --panel:#0f1621;
+  --card:#0f1724;
+  --primary:#e6edf6;
+  --muted:#9fb1c5;
+  --line:rgba(130,170,210,0.18);
+  --accent:#2b55ff;     /* サイバーな水色 */
+  --accent2:#ffb020;    /* 警告/ポイント用 */
+  --shadow: 0 10px 30px rgba(0,0,0,0.45);
+}
+body{background:linear-gradient(180deg,#070a0f 0%, var(--bg) 40%, #070a0f 100%); color:var(--primary);}
+
+    header{
+   background:
+    radial-gradient(1200px 360px at 20% 10%, rgba(43,220,255,0.18), transparent 55%),
+    radial-gradient(900px 320px at 80% 0%, rgba(255,176,32,0.12), transparent 55%),
+    linear-gradient(180deg, rgba(8,12,18,0.98), rgba(12,18,28,0.92));
+  border-bottom:1px solid var(--line);
+  }
+  header h1{
+  letter-spacing:1.2px;
+  text-transform:uppercase;
+  }   
+  header .cta{
+   background:linear-gradient(90deg, var(--accent), rgba(43,220,255,0.55));
+   color:#001018;
+   border:1px solid rgba(43,220,255,0.55);
+   box-shadow:0 10px 24px rgba(43,220,255,0.12);
+  }
+#breadcrumbs{color:rgba(230,237,246,0.75)}
+
+    #breadcrumbs{margin-top:8px;font-size:0.9rem;opacity:0.85}
+
+    .container{max-width:1200px;margin:22px auto;padding:0 16px}
+    .top-controls{
+      display:flex;gap:10px;flex-wrap:wrap;align-items:center;
+      background:var(--card);padding:12px;border-radius:12px;border:1px solid var(--line);
+      box-shadow:0 6px 18px rgba(8,20,12,0.04)
+    }
+    .search{flex:1;min-width:220px}
+    input[type=search]{width:100%;padding:10px;border-radius:8px;border:1px solid var(--line)}
+    .select, .btn{padding:10px 12px;border-radius:8px;border:1px solid var(--line);background:white}
+    .chk{
+      background:rgba(43,220,255,0.06);
+     border:1px solid rgba(43,220,255,0.16);
+     color:var(--primary);
+    }
+    .chk input[type="checkbox"]{
+     width:15px;height:15px;
+     accent-color: var(--accent);
+    }
+
+
+    .layout{
+      display:grid;
+      grid-template-columns:320px 1fr;
+      gap:18px;margin-top:16px;align-items:start;
+    }
+    @media (max-width:980px){ .layout{grid-template-columns:1fr} }
+
+    .sidebar{
+      background:var(--card);padding:14px;border-radius:12px;border:1px solid var(--line);
+      box-shadow:0 6px 18px rgba(8,20,12,0.04)
+    }
+    .sidebar h3{margin:0 0 10px}
+    .small{font-size:0.85rem;color:var(--muted);line-height:1.5}
+    .category-list button{
+      display:block;width:100%;text-align:left;padding:8px;border-radius:8px;border:none;
+      background:transparent;cursor:pointer;color:#222
+    }
+    .category-list button:hover{background:rgba(212,175,55,0.12)}
+    .pill-area{display:flex;flex-wrap:wrap;gap:6px}
+    .pill{
+      padding:5px 10px;border-radius:999px;border:1px solid rgba(212,175,55,0.35);
+      background:rgba(212,175,55,0.12);color:var(--primary);cursor:pointer;font-size:0.85rem;
+      user-select:none
+    }
+    .pill:hover{filter:brightness(0.98)}
+    .pill.active{background:rgba(212,175,55,0.22);border-color:rgba(212,175,55,0.65);font-weight:800}
+
+    .ranking{display:flex;flex-direction:column;gap:10px}
+    .rank-item{display:flex;gap:12px;align-items:center}
+    .rank-item img{width:64px;height:48px;object-fit:contain;border-radius:8px;background:#fff;border:1px solid var(--line)}
+    .rank-item .num{width:34px;font-weight:900;color:var(--primary)}
+    .rank-item .name{font-weight:900;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .rank-item .sub{color:var(--muted);font-size:0.85rem;margin-top:2px}
+
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px}
+    .card{
+      background:var(--card);border-radius:12px;overflow:hidden;border:1px solid var(--line);
+      box-shadow:0 6px 18px rgba(8,20,12,0.06);display:flex;flex-direction:column
+    }
+    .card img{
+      width:100%;height:210px;object-fit:contain;background:#fff;border-bottom:1px solid var(--line)
+    }
+    .card-body{padding:12px;display:flex;flex-direction:column;gap:8px}
+    .title{font-weight:900;margin:0}
+    .meta{display:flex;gap:8px;align-items:center;font-size:0.9rem;color:var(--muted)}
+    .price{color:var(--primary);font-weight:900}
+    .specline{font-size:0.9rem;color:#333;background:rgba(0,0,0,0.03);padding:8px;border-radius:10px}
+    .notes{font-size:0.92rem;color:#222;line-height:1.45}
+    .buy-row{display:flex;gap:8px;margin-top:6px}
+    .buy{
+      flex:1;padding:9px 10px;border-radius:10px;text-align:center;text-decoration:none;
+      font-weight:900;display:inline-flex;justify-content:center;align-items:center
+    }
+    .buy.amazon{background:#ff9900;color:white}
+    .buy.rakuten{background:#e60012;color:white}
+    .buy:active{transform:translateY(1px)}
+    footer{text-align:center;color:var(--muted);margin:28px 0;line-height:1.6}
+    .status{margin:10px 0 0;color:var(--muted);font-size:0.9rem}
+
+    /* ----------------- 🛈 ツールチップ（data-tip方式） ----------------- */
+    /* 小さめ ! アイコン */
+    .info{
+     position: relative;
+     display: inline-flex;
+     align-items: center;
+     justify-content: center;
+
+     width: 12px;
+     height: 12px;
+     border-radius: 999px;
+
+     border: 1px solid rgba(0, 0, 0, 0.35);
+     background:rgba(255, 255, 255, 0.849);
+      color: var(--accent);
+ 
+      font-size: 9px;
+     font-weight: 900;
+     line-height: 1;
+
+     cursor: help;
+     user-select: none;
+     margin-left: 6px;
+    }
+
+    .info::after{
+      content: attr(data-tip);
+      position: absolute;
+      left: 50%;
+      bottom: 140%;
+      transform: translateX(-50%);
+      width: min(280px, 72vw);
+      padding: 10px 12px;
+      border-radius: 10px;
+      background: rgba(20,20,20,0.95);
+      color: #fff;
+      font-size: 12px;
+      line-height: 1.5;
+      text-align: left;
+
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity .15s ease, visibility .15s ease;
+      z-index: 9999;
+    }
+    .info::before{
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: 128%;
+      transform: translateX(-50%);
+      border: 6px solid transparent;
+      border-top-color: rgba(20,20,20,0.95);
+
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity .15s ease, visibility .15s ease;
+      z-index: 9999;
+    }
+    .info:hover::after,
+    .info:hover::before{
+      opacity: 1;
+      visibility: visible;
+    }
+    .info:hover{
+     background:rgba(0, 0, 0, 0.18);
+     border-color:rgba(87, 231, 20, 0.934);
+    }
+
+  </style>
+
+  <!-- 構造化データ（WebSite）: JSONのみ（CSSを絶対混ぜない） -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Good for life | ACアダプター比較サイト",
+    "url": "https://example.com",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://example.com/?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+
+  <script id="breadcrumbLD" type="application/ld+json"></script>
+</head>
+
+<body>
+<header>
+  <div class="wrap">
+    <h1 id="mainTitle">Good for life | ACアダプター比較サイト</h1>
+    <div id="breadcrumbs"></div>
+    <p><br></p>
+    <a class="cta" href="#products">商品を見る</a>
+    <div id="status" class="status"></div>
+  </div>
+</header>
+
+<main class="container">
+  <div class="top-controls">
+    <input id="search" class="search" type="search" placeholder="検索（例：Anker 65W / PPS / 3ポート）" />
+
+    <select id="sort" class="select">
+      <option value="recommend_desc">おすすめ順</option>
+      <option value="price_asc">価格：安い順</option>
+      <option value="price_desc">価格：高い順</option>
+      <option value="discount_desc">割引率：高い順</option>
+      <option value="w_desc">最大W：高い順</option>
+      <option value="weight_asc">重量：軽い順</option>
+    </select>
+
+    <select id="categorySel" class="select">
+      <option value="all">カテゴリ：すべて</option>
+      <option value="スマホ向け（20〜45W）">スマホ向け（20〜45W）</option>
+      <option value="PC/タブレット向け（45〜100W）">PC/タブレット向け（45〜100W）</option>
+      <option value="100W以上">100W以上</option>
+      <option value="2台以上同時充電">2台以上同時充電</option>
+      <option value="小型（GaN）">小型（GaN）</option>
+      <option value="急速充電（PPS）">急速充電（PPS）</option>
+      <option value="折りたたみプラグ">折りたたみプラグ</option>
+      <option value="PD対応">PD対応</option>
+      <option value="PSE技術基準適合">PSE技術基準適合</option>
+    </select>
+
+    <select id="minW" class="select">
+      <option value="0">出力: 指定なし</option>
+      <option value="20-45">20–45W（スマホ向け）</option>
+      <option value="45-100">45–100W（PC/タブレット向け）</option>
+      <option value="100+">100W以上（高出力）</option>
+    </select>
+
+    <select id="minC" class="select">
+      <option value="0">USB-Cポート: 指定なし</option>
+      <option value="1">1+</option>
+      <option value="2">2+</option>
+      <option value="3">3+</option>
+    </select>
+
+    <label class="chk">
+      <input type="checkbox" id="ppsOnly">
+      急速充電（PPS）
+      <span class="info" data-tip="Androidの「超急速充電」で必要になることが多い規格。対応していないと最大速度が出ない場合があります。">！</span>
+    </label>
+
+    <label class="chk">
+      <input type="checkbox" id="pseOnly">
+      PSE技術基準適合
+      <span class="info" data-tip="日本の電気用品安全法に基づき、基準を満たした電化製品に表示される安全マーク。">！</span>
+    </label>
+
+    <label class="chk">
+      <input type="checkbox" id="ganOnly">
+      小型・発熱少（GaN）
+      <span class="info" data-tip="GaN（窒化ガリウム）採用だと、同じ出力でも小型になりやすく、発熱が抑えられやすい傾向があります。">！</span>
+    </label>
+
+    <label class="chk">
+      <input type="checkbox" id="foldOnly">
+      折りたたみプラグ
+      <span class="info" data-tip="プラグが折りたためるタイプ。持ち運びに便利です。">！</span>
+    </label>
+
+    <label class="chk">
+      <input type="checkbox" id="pdOnly" />
+      PD対応
+      <span class="info" data-tip="USB Power Delivery対応。iPhone/iPad/ノートPCなど幅広く高速充電しやすい規格です。">！</span>
+    </label>
+
+    <label class="chk"><input type="checkbox" id="jpOnly" /> 日本製のみ</label>
+  </div>
+
+  <div class="layout">
+    <aside class="sidebar">
+      <h3>おすすめTOP 10</h3>
+      <div id="ranking" class="ranking"></div>
+
+      <hr style="margin:14px 0;border:none;border-top:1px solid var(--line)">
+
+      <h3>カテゴリ（クリックで絞り込み）</h3>
+      <div id="categories" class="category-list"></div>
+
+      <hr style="margin:14px 0;border:none;border-top:1px solid var(--line)">
+
+      <h3>タグ</h3>
+      <div id="tagArea" class="pill-area"></div>
+
+      <hr style="margin:14px 0;border:none;border-top:1px solid var(--line)">
+
+      <div class="small">
+        <b>シート列（必須）</b><br>
+        product_id, category(空でもOK), maker, product_name, tags, company_country, max_w, ports_c, pse, pd, pps, gan, plug_fold, weight_g, size_mm, multi_output_rule, personal_rating, review_rating, popularity, discount_rate, price, notes, amazon_link, rakuten_link, image_url<br><br>
+        <b>追加推奨（任意）</b><br>
+        pse（PSE判定 1/0）
+      </div>
+    </aside>
+
+    <section id="products">
+      <div id="grid" class="grid"></div>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <small>
+    スプレッドシートは「ファイル → 共有 → ウェブに公開（CSV）」で公開してください。<br>
+    Amazon / 楽天リンクはそれぞれの列に入れるとボタンが出ます（nofollow付与済み）。
+  </small>
+</footer>
+
+<script>
+  // ★あなたのCSV公開URL
+  const DATA_URL = `https://docs.google.com/spreadsheets/d/e/2PACX-1vSx4J4JbzBz1OAPZFWEPz7qI010bBmNoZ9xTdBWFfJBlyxng-2GU56n2wGSss8kpilPNe44TzTetQxS/pub?gid=0&single=true&output=csv`;
+
+  // ---------- helpers ----------
+  const FALLBACK_IMG = 'data:image/svg+xml;utf8,' + encodeURIComponent(
+    `<svg xmlns="http://www.w3.org/2000/svg" width="800" height="800">
+      <rect width="100%" height="100%" fill="#e9eef0"/>
+      <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#999" font-size="24">No Image</text>
+    </svg>`
+  );
+
+  function toNum(v, fallback=0){
+    const n = Number(String(v ?? '').replace(/[^0-9.]/g,''));
+    return Number.isFinite(n) ? n : fallback;
+  }
+  function to01(v){ return String(v ?? '').trim() === '1' ? 1 : 0; }
+
+  // robust CSV parser (quotes supported)
+  function parseCSV(csv){
+    const lines = csv.trim().split(/\r?\n/);
+    const out = [];
+    for(const line of lines){
+      const cols = [];
+      let cur = '', inQ = false;
+      for(let i=0;i<line.length;i++){
+        const ch = line[i];
+        if(ch === '"'){
+          inQ = !inQ;
+        }else if(ch === ',' && !inQ){
+          cols.push(cur); cur = '';
+        }else{
+          cur += ch;
+        }
+      }
+      cols.push(cur);
+      out.push(cols.map(c => c.trim().replace(/^"|"$/g,'')));
+    }
+    return out;
+  }
+
+  function csvToObjects(csv){
+    const rows = parseCSV(csv);
+    const header = (rows.shift() || []).map(h => h.trim());
+
+    return rows.map(r=>{
+      const x = {};
+      header.forEach((h,i)=>{ x[h] = (r[i] ?? ''); });
+
+      x.product_id = (x.product_id || '').trim();
+      x.category = (x.category || '').trim();
+      x.maker = (x.maker || '').trim();
+      x.product_name = (x.product_name || '').trim();
+      x.tags = (x.tags || '').trim();
+      x.company_country = (x.company_country || '').trim();
+
+      x.max_w = toNum(x.max_w);
+      x.ports_c = toNum(x.ports_c);
+      x.ports_a = toNum(x.ports_a);
+      x.pd = to01(x.pd);
+      x.pps = to01(x.pps);
+      x.gan = to01(x.gan);
+      x.plug_fold = to01(x.plug_fold);
+      x.weight_g = toNum(x.weight_g);
+      x.size_mm = (x.size_mm || '').trim();
+      x.multi_output_rule = (x.multi_output_rule || '').trim();
+
+      // 任意列：pse（無い場合は0扱い）
+      x.pse = to01(x.pse);
+
+      x.personal_rating = toNum(x.personal_rating);
+      x.review_rating = toNum(x.review_rating);
+      x.popularity = toNum(x.popularity);
+      x.discount_rate = toNum(x.discount_rate);
+      x.price = toNum(x.price);
+
+      x.notes = (x.notes || '').trim();
+      x.amazon_link = (x.amazon_link || '').trim();
+      x.rakuten_link = (x.rakuten_link || '').trim();
+      x.image_url = (x.image_url || '').trim();
+
+      if(!x.product_id){
+        const base = (x.maker + '_' + x.product_name).toLowerCase()
+          .replace(/[^a-z0-9]+/g,'_').replace(/^_+|_+$/g,'');
+        x.product_id = base || ('item_' + Math.random().toString(36).slice(2,8));
+      }
+
+      return x;
+    });
+  }
+
+  // ---------- categories ----------
+  const CAT_PHONE = "スマホ向け（20〜45W）";
+  const CAT_PC    = "PC/タブレット向け（45〜100W）";
+  const CAT_100P  = "100W以上";
+  const CAT_MULTI = "2台以上同時充電";
+  const CAT_GAN   = "小型（GaN）";
+  const CAT_PPS   = "急速充電（PPS）";
+  const CAT_FOLD  = "折りたたみプラグ";
+  const CAT_PD    = "PD対応";
+  const CAT_PSE   = "PSE技術基準適合";
+
+  const FIXED_CATS = [CAT_PHONE, CAT_PC, CAT_100P, CAT_MULTI, CAT_GAN, CAT_PPS, CAT_FOLD, CAT_PD, CAT_PSE];
+
+  function inferCats(it){
+    const cats = new Set();
+
+    if(it.max_w >= 100) cats.add(CAT_100P);
+    else if(it.max_w >= 45) cats.add(CAT_PC);
+    else if(it.max_w >= 20) cats.add(CAT_PHONE);
+
+    if((it.ports_c + it.ports_a) >= 2 || it.ports_c >= 2) cats.add(CAT_MULTI);
+    if(it.gan === 1) cats.add(CAT_GAN);
+    if(it.pps === 1) cats.add(CAT_PPS);
+    if(it.plug_fold === 1) cats.add(CAT_FOLD);
+    if(it.pd === 1) cats.add(CAT_PD);
+    if(it.pse === 1) cats.add(CAT_PSE);
+
+    if(it.category) cats.add(it.category);
+
+    return Array.from(cats);
+  }
+
+  // ---------- recommend scoring ----------
+  function recommendScore(it){
+    const pr = it.personal_rating || 0;
+    const rr = it.review_rating || 0;
+    const pop = it.popularity || 0;
+    const disc = it.discount_rate || 0;
+
+    let s = 0;
+    s += pr * 12;
+    s += rr * 6;
+    s += Math.min(pop, 1000) * 0.02;
+    s += Math.min(disc, 80) * 0.08;
+
+    if(it.pps === 1) s += 0.8;
+    if(it.gan === 1) s += 0.6;
+    if(it.max_w >= 45) s += 0.4;
+    if(it.max_w >= 100) s += 0.5;
+    if(it.ports_c >= 2) s += 0.4;
+    if(it.plug_fold === 1) s += 0.3;
+
+    if(!it.amazon_link && !it.rakuten_link) s -= 2.0;
+    return s;
+  }
+
+  // ---------- UI render ----------
+  function escapeHtml(s){
+    return String(s ?? '')
+      .replaceAll('&','&amp;')
+      .replaceAll('<','&lt;')
+      .replaceAll('>','&gt;')
+      .replaceAll('"','&quot;')
+      .replaceAll("'","&#39;");
+  }
+
+  function renderGrid(items){
+    const grid = document.getElementById('grid');
+    grid.innerHTML = '';
+    if(!items.length){
+      grid.innerHTML = '<p>該当する商品がありません</p>';
+      return;
+    }
+
+    items.forEach(it=>{
+      const card = document.createElement('article');
+      card.className = 'card';
+
+      const img = document.createElement('img');
+      img.src = it.image_url || FALLBACK_IMG;
+      img.alt = it.product_name || '';
+      img.loading = 'lazy';
+      img.onerror = ()=>{ img.src = FALLBACK_IMG; };
+
+      const body = document.createElement('div');
+      body.className = 'card-body';
+
+      const specParts = [];
+      if(it.max_w) specParts.push(`${it.max_w}W`);
+      specParts.push(`C${it.ports_c||0}/A${it.ports_a||0}`);
+      if(it.pd) specParts.push('PD');
+      if(it.pps) specParts.push('PPS');
+      if(it.gan) specParts.push('GaN');
+      if(it.plug_fold) specParts.push('折プラグ');
+      if(it.pse) specParts.push('PSE');
+      if(it.weight_g) specParts.push(`${it.weight_g}g`);
+      if(it.multi_output_rule) specParts.push(it.multi_output_rule);
+
+      const spec = specParts.join(' / ') || '—';
+
+      const score = recommendScore(it);
+      const scoreText = score ? score.toFixed(1) : '0.0';
+
+      body.innerHTML = `
+        <div class="title">${escapeHtml(it.product_name || '')}</div>
+        <div class="meta">
+          <div class="price">¥${it.price ? it.price.toLocaleString() : 'ー'}</div>
+          <div style="margin-left:auto">おすすめ度 ${it.personal_rating || 0} / スコア ${scoreText}</div>
+        </div>
+        <div class="specline">${escapeHtml(spec)}</div>
+        <div class="notes">${escapeHtml(it.notes || '')}</div>
+      `;
+
+      const buyRow = document.createElement('div');
+      buyRow.className = 'buy-row';
+
+      if(it.amazon_link){
+        const a = document.createElement('a');
+        a.className = 'buy amazon';
+        a.href = it.amazon_link;
+        a.target = '_blank';
+        a.rel = 'nofollow noopener noreferrer';
+        a.textContent = 'Amazonで価格を見る';
+        buyRow.appendChild(a);
+      }
+      if(it.rakuten_link){
+        const a = document.createElement('a');
+        a.className = 'buy rakuten';
+        a.href = it.rakuten_link;
+        a.target = '_blank';
+        a.rel = 'nofollow noopener noreferrer';
+        a.textContent = '楽天で価格を見る';
+        buyRow.appendChild(a);
+      }
+
+      body.appendChild(buyRow);
+      card.appendChild(img);
+      card.appendChild(body);
+      grid.appendChild(card);
+    });
+  }
+
+  function renderRanking(items){
+    const rank = document.getElementById('ranking');
+    rank.innerHTML = '';
+
+    const top = [...items].sort((a,b)=>recommendScore(b)-recommendScore(a)).slice(0,10);
+
+    top.forEach((it,i)=>{
+      const el = document.createElement('div');
+      el.className = 'rank-item';
+
+      const num = document.createElement('div');
+      num.className = 'num';
+      num.textContent = `#${i+1}`;
+
+      const img = document.createElement('img');
+      img.src = it.image_url || FALLBACK_IMG;
+      img.loading = 'lazy';
+      img.onerror = ()=>{ img.src = FALLBACK_IMG; };
+
+      const box = document.createElement('div');
+      box.style.minWidth = '0';
+
+      const name = document.createElement('div');
+      name.className = 'name';
+      name.textContent = it.product_name || '';
+
+      const sub = document.createElement('div');
+      sub.className = 'sub';
+      const specMini = [];
+      if(it.max_w) specMini.push(`${it.max_w}W`);
+      if(it.pd) specMini.push('PD');
+      if(it.pps) specMini.push('PPS');
+      if(it.gan) specMini.push('GaN');
+      if(it.plug_fold) specMini.push('折');
+      if(it.pse) specMini.push('PSE');
+      sub.textContent = `${specMini.join(' / ') || '—'}  | スコア ${recommendScore(it).toFixed(1)}`;
+
+      box.appendChild(name);
+      box.appendChild(sub);
+
+      el.appendChild(num);
+      el.appendChild(img);
+      el.appendChild(box);
+
+      rank.appendChild(el);
+    });
+  }
+
+  function buildCategoryButtons(){
+    const catDiv = document.getElementById('categories');
+    catDiv.innerHTML = '';
+
+    const makeBtn = (label, value) => {
+      const b = document.createElement('button');
+      b.textContent = label;
+      b.onclick = ()=>{
+        const sel = document.getElementById('categorySel');
+        if(sel) sel.value = value;
+        applyFilters();
+      };
+      catDiv.appendChild(b);
+    };
+
+    makeBtn('すべて', 'all');
+    FIXED_CATS.forEach(c => makeBtn(c, c));
+  }
+
+  function generateTags(items){
+    const tagSet = new Set();
+    items.forEach(it=>{
+      if(it.tags){
+        it.tags.split(',').map(s=>s.trim()).filter(Boolean).forEach(t=>tagSet.add(t));
+      }
+      if(it.maker) tagSet.add(it.maker);
+      if(it.max_w >= 100) tagSet.add('100W+');
+      if(it.max_w >= 45 && it.max_w < 100) tagSet.add('45-100W');
+      if(it.max_w >= 20 && it.max_w < 45) tagSet.add('20-45W');
+      if(it.pd) tagSet.add('PD');
+      if(it.pps) tagSet.add('PPS');
+      if(it.gan) tagSet.add('GaN');
+      if(it.plug_fold) tagSet.add('折プラグ');
+      if(it.pse) tagSet.add('PSE');
+      if(it.ports_c >= 2) tagSet.add('USB-C 2+');
+    });
+
+    const area = document.getElementById('tagArea');
+    area.innerHTML = '';
+
+    const tags = Array.from(tagSet).slice(0,30);
+    tags.forEach(t=>{
+      const el = document.createElement('span');
+      el.className = 'pill';
+      el.textContent = t;
+      el.onclick = ()=>{
+        document.getElementById('search').value = t;
+        applyFilters();
+      };
+      area.appendChild(el);
+    });
+  }
+
+  function updateBreadcrumbs(cat){
+    const bc = document.getElementById('breadcrumbs');
+    let text = '';
+    if(cat && cat !== 'all') text += ' > ' + cat;
+    bc.textContent = text;
+
+    const ld = {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      'itemListElement': [
+        {'@type':'ListItem','position':1,'name':'','item':'https://example.com'}
+      ]
+    };
+    if(cat && cat !== 'all'){
+      ld.itemListElement.push({'@type':'ListItem','position':2,'name':cat,'item':'https://example.com#'+encodeURIComponent(cat)});
+    }
+    document.getElementById('breadcrumbLD').textContent = JSON.stringify(ld);
+  }
+
+  function updateSEO(cat){
+    const titleEl = document.getElementById('mainTitle');
+    const meta = document.getElementById('metaDesc');
+
+    if(cat && cat !== 'all'){
+      titleEl.textContent = `Good for life | ACアダプター比較サイト - ${cat}`;
+      meta.content = `USB-C充電器を「${cat}」で絞り込み、Amazonと楽天で価格比較できます。`;
+      document.title = titleEl.textContent;
+    }else{
+      titleEl.textContent = 'Good for life | ACアダプター比較サイト';
+      meta.content = 'USB-C充電器を出力・PPS・GaN・折プラグ・ポート数で絞り込み、Amazonと楽天で価格比較できます。';
+      document.title = titleEl.textContent;
+    }
+  }
+
+  // ---------- data + filtering ----------
+  let data = [];
+
+  function matchW(w, sel){
+    if(sel === "0") return true;
+    if(sel === "20-45") return w >= 20 && w < 45;
+    if(sel === "45-100") return w >= 45 && w < 100;
+    if(sel === "100+") return w >= 100;
+    return true;
+  }
+
+  function applyFilters(){
+    let out = data.slice();
+
+    const q = document.getElementById('search').value.trim().toLowerCase();
+    const catSel = document.getElementById('categorySel').value;
+
+    const jpOnly = document.getElementById('jpOnly').checked;
+    const wSel = document.getElementById('minW').value || "0";
+    const minC = Number(document.getElementById('minC').value || 0);
+
+    const ppsOnly = document.getElementById('ppsOnly').checked;
+    const ganOnly = document.getElementById('ganOnly').checked;
+    const foldOnly = document.getElementById('foldOnly').checked;
+    const pdOnly = document.getElementById('pdOnly').checked;
+    const pseOnly = document.getElementById('pseOnly').checked;
+
+    if(q){
+      out = out.filter(i=>{
+        const hay = `${i.product_name} ${i.maker} ${i.tags} ${i.notes}`.toLowerCase();
+        return hay.includes(q);
+      });
+    }
+
+    if(catSel !== 'all'){
+      out = out.filter(i => (i._cats || []).includes(catSel) || i.category === catSel);
+    }
+
+    if(jpOnly){
+      out = out.filter(i => (i.company_country || '') === '日本');
+    }
+
+    out = out.filter(i => matchW((i.max_w || 0), wSel));
+
+    if(minC){
+      out = out.filter(i => (i.ports_c || 0) >= minC);
+    }
+    if(pdOnly){
+      out = out.filter(i => (i.pd || 0) === 1);
+    }
+    if(ppsOnly){
+      out = out.filter(i => (i.pps || 0) === 1);
+    }
+    if(ganOnly){
+      out = out.filter(i => (i.gan || 0) === 1);
+    }
+    if(foldOnly){
+      out = out.filter(i => (i.plug_fold || 0) === 1);
+    }
+    if(pseOnly){
+      out = out.filter(i => (i.pse || 0) === 1);
+    }
+
+    const sort = document.getElementById('sort').value;
+    if(sort === 'price_asc'){
+      out.sort((a,b)=>(a.price||0)-(b.price||0));
+    }else if(sort === 'price_desc'){
+      out.sort((a,b)=>(b.price||0)-(a.price||0));
+    }else if(sort === 'discount_desc'){
+      out.sort((a,b)=>(b.discount_rate||0)-(a.discount_rate||0));
+    }else if(sort === 'w_desc'){
+      out.sort((a,b)=>(b.max_w||0)-(a.max_w||0));
+    }else if(sort === 'weight_asc'){
+      out.sort((a,b)=>((a.weight_g||999999)-(b.weight_g||999999)));
+    }else{
+      out.sort((a,b)=>recommendScore(b)-recommendScore(a));
+    }
+
+    renderGrid(out);
+    renderRanking(out.length ? out : data);
+    updateSEO(catSel);
+    updateBreadcrumbs(catSel);
+
+    document.getElementById('status').textContent =
+      `表示中: ${out.length} 件 / 全 ${data.length} 件`;
+  }
+
+  function on(id, ev, fn){
+    const el = document.getElementById(id);
+    if(!el){
+      console.warn("要素が見つからない:", id);
+      return;
+    }
+    el.addEventListener(ev, fn);
+  }
+
+  async function init(){
+    try{
+      const res = await fetch(DATA_URL, {cache:'no-cache'});
+      if(!res.ok) throw new Error('CSV取得失敗: ' + res.status);
+
+      const csv = await res.text();
+      console.log("CSV先頭200文字:", csv.slice(0,200));
+
+      const raw = csvToObjects(csv);
+      data = raw.map(it=>{
+        it._cats = inferCats(it);
+        return it;
+      });
+
+      buildCategoryButtons();
+      generateTags(data);
+
+      updateSEO('all');
+      updateBreadcrumbs('all');
+
+      on('search','input',applyFilters);
+      on('sort','change',applyFilters);
+      on('categorySel','change',applyFilters);
+      on('jpOnly','change',applyFilters);
+      on('minW','change',applyFilters);
+      on('minC','change',applyFilters);
+      on('ppsOnly','change',applyFilters);
+      on('ganOnly','change',applyFilters);
+      on('foldOnly','change',applyFilters);
+      on('pdOnly','change',applyFilters);
+      on('pseOnly','change',applyFilters);
+
+      applyFilters();
+
+    }catch(e){
+      console.error(e);
+      document.getElementById('grid').innerHTML =
+        '<p>データの取得に失敗しました。CSV公開設定とURL、列名が正しいか確認してください。</p>';
+      document.getElementById('status').textContent = 'エラー: ' + String(e.message || e);
+    }
+  }
+
+  init();
+</script>
+</body>
+</html>
