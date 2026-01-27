@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <title>GaN充電器とは？メリット・デメリットと注意点【ACアダプター比較へ】</title>
+  <meta name="description" content="GaN（窒化ガリウム）充電器とは何かを、メリット・デメリット・注意点までわかりやすく解説。小型高出力の強みと、品質差・価格などの落とし穴も整理し、条件別に比較できるページへ誘導します。" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="GaN充電器とは？メリット・デメリットと注意点" />
+  <meta property="og:description" content="GaNの強みと弱点を最短で理解。出力・PPS・日本製など条件別比較へ。" />
+  <!-- <meta property="og:image" content="https://example.com/ogp.jpg" /> -->
+  <!-- <meta property="og:url" content="https://kujou-negi.github.io/affiliate-site/gan-charger.html" /> -->
+
+  <style>
+    :root{
+      --bg:#0b0f17;
+      --card:#0f1623;
+      --text:#e8eefc;
+      --muted:#a8b3cf;
+      --line:#22304a;
+      --accent:#7cc4ff;
+      --accent2:#a7ffcf;
+      --warning:#ffdd7c;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius: 18px;
+      --max: 980px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic", Arial, sans-serif;
+      background:
+        radial-gradient(1200px 600px at 20% -10%, rgba(124,196,255,.18), transparent 60%),
+        radial-gradient(900px 500px at 90% 0%, rgba(167,255,207,.12), transparent 60%),
+        var(--bg);
+      color:var(--text);
+      line-height:1.7;
+    }
+    a{color:inherit}
+    .wrap{max-width:var(--max); margin:0 auto; padding:24px 18px 70px;}
+    header{
+      padding:26px 0 10px;
+      border-bottom:1px solid rgba(34,48,74,.55);
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      color:var(--muted); font-size:14px; letter-spacing:.02em;
+    }
+    .dot{
+      width:10px;height:10px;border-radius:999px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 0 0 3px rgba(124,196,255,.12);
+    }
+    h1{
+      margin:14px 0 10px;
+      font-size: clamp(26px, 3.6vw, 40px);
+      line-height:1.2;
+      letter-spacing:.01em;
+    }
+    .lead{
+      margin:0 0 18px;
+      color:var(--muted);
+      font-size: 16px;
+    }
+    .pillrow{display:flex; flex-wrap:wrap; gap:10px; margin:14px 0 0;}
+    .pill{
+      padding:8px 12px;
+      border:1px solid rgba(34,48,74,.8);
+      background: rgba(15,22,35,.65);
+      border-radius:999px;
+      font-size:13px;
+      color:var(--muted);
+    }
+    main{padding-top:18px}
+    .grid{
+      display:grid;
+      grid-template-columns: 1.3fr .7fr;
+      gap:16px;
+      margin-top:16px;
+    }
+    @media (max-width: 880px){
+      .grid{grid-template-columns:1fr}
+    }
+    .card{
+      background: rgba(15,22,35,.78);
+      border:1px solid rgba(34,48,74,.8);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding:18px 18px;
+    }
+    h2{
+      margin: 0 0 10px;
+      font-size: 20px;
+      letter-spacing:.01em;
+    }
+    h3{
+      margin: 14px 0 8px;
+      font-size: 16px;
+      color: var(--text);
+    }
+    p{margin: 0 0 12px}
+    ul{margin: 0 0 12px 1.2em; padding:0}
+    li{margin:6px 0; color:var(--muted)}
+    .callout{
+      border:1px solid rgba(124,196,255,.35);
+      background: rgba(124,196,255,.08);
+      border-radius: var(--radius);
+      padding:14px 14px;
+      margin: 12px 0 0;
+      color: var(--muted);
+    }
+    .warn{
+      border:1px solid rgba(255,221,124,.35);
+      background: rgba(255,221,124,.08);
+    }
+    .checks{list-style:none; margin-left:0}
+    .checks li{
+      margin:10px 0;
+      padding-left:28px;
+      position:relative;
+      color:var(--text);
+    }
+    .checks li::before{
+      content:"✓";
+      position:absolute; left:0; top:0;
+      width:20px; height:20px;
+      display:inline-flex; align-items:center; justify-content:center;
+      border-radius:6px;
+      background: rgba(167,255,207,.12);
+      border:1px solid rgba(167,255,207,.35);
+      color: var(--accent2);
+      font-weight:700;
+      line-height:1;
+    }
+    .qa .item{
+      padding:12px 12px;
+      border-radius: 14px;
+      border:1px solid rgba(34,48,74,.7);
+      background: rgba(11,15,23,.35);
+      margin: 10px 0;
+    }
+    .qa .q{
+      color: var(--text);
+      font-weight: 800;
+      margin:0 0 6px;
+    }
+    .qa .a{
+      color: var(--muted);
+      margin:0;
+    }
+    .cta{
+      display:flex; flex-direction:column; gap:10px;
+    }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px;
+      padding:14px 14px;
+      border-radius: 16px;
+      text-decoration:none;
+      border:1px solid rgba(124,196,255,.45);
+      background: linear-gradient(135deg, rgba(124,196,255,.18), rgba(167,255,207,.10));
+      box-shadow: 0 10px 28px rgba(124,196,255,.10);
+      font-weight: 900;
+      letter-spacing:.02em;
+      text-align:center;
+    }
+    .btn:hover{transform: translateY(-1px)}
+    .btn small{font-weight:700; color:var(--muted); letter-spacing:0}
+    .subbtn{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:12px 14px;
+      border-radius: 14px;
+      text-decoration:none;
+      border:1px solid rgba(34,48,74,.8);
+      background: rgba(11,15,23,.35);
+      color: var(--muted);
+      font-weight:700;
+      text-align:center;
+    }
+    .note{font-size:13px; color:var(--muted)}
+    footer{
+      margin-top:26px;
+      padding-top:18px;
+      border-top:1px solid rgba(34,48,74,.55);
+      color: var(--muted);
+      font-size: 13px;
+    }
+    code.k{
+      padding:2px 6px;
+      border-radius:8px;
+      border:1px solid rgba(34,48,74,.8);
+      background: rgba(11,15,23,.35);
+      color: var(--text);
+      font-weight: 800;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header id="top">
+      <div class="brand"><span class="dot"></span><span>ACアダプター比較・選び方</span></div>
+      <h1>GaN充電器とは？メリット・デメリットと注意点をわかりやすく解説</h1>
+      <p class="lead">
+        GaN（窒化ガリウム）充電器は<strong>小型・高出力</strong>が魅力。いっぽうで<strong>価格</strong>や<strong>品質差</strong>など落とし穴もあります。
+        この記事で「何が良くて何に注意すべきか」を最短理解 → 条件別の比較ページへ。
+      </p>
+      <div class="pillrow">
+        <span class="pill">GaN</span>
+        <span class="pill">小型</span>
+        <span class="pill">高出力</span>
+        <span class="pill">PPS</span>
+        <span class="pill">日本製</span>
+      </div>
+    </header>
+
+    <main class="grid">
+      <!-- 左：本文 -->
+      <article class="card">
+        <h2>結論：GaNは「小型化しやすい」次世代素材。けど万能ではない</h2>
+        <p>
+          GaN（ガン：窒化ガリウム）は、充電器の内部で使われる半導体材料のひとつです。
+          従来のシリコン系より<strong>高効率・高周波</strong>で動作しやすく、同じ出力なら<strong>小型化しやすい</strong>のが強みです。
+          ただし「GaNだから全部正解」ではなく、用途・出力・安全性（品質）で選ぶのが大切です。
+        </p>
+
+        <div class="callout">
+          迷ったらこれ：<br/>
+          <strong>GaNかどうかより「出力(W)」「PPS対応」「ポート構成」</strong>を先に見ましょう。
+        </div>
+
+        <h2 style="margin-top:18px;">GaN充電器のメリット</h2>
+        <ul>
+          <li><strong>小型・軽量になりやすい</strong>（持ち運び用途で体感差が出る）</li>
+          <li><strong>高出力でも効率が良い</strong>（発熱やロスを抑えやすい傾向）</li>
+          <li><strong>複数ポート設計と相性が良い</strong>（1台でスマホ＋PC運用しやすい）</li>
+          <li><strong>デスク周りがスッキリ</strong>（ケーブル整理・コンセント占有を減らせる）</li>
+        </ul>
+
+        <h2 style="margin-top:18px;">GaN充電器のデメリット（ここが大事）</h2>
+        <section class="qa">
+          <div class="item">
+            <p class="q">① 価格が高めになりやすい</p>
+            <p class="a">→ 小型化のメリットと引き換えに、同出力のシリコン製より高い場合があります。</p>
+          </div>
+          <div class="item">
+            <p class="q">② 品質差が大きい（安いGaNは要注意）</p>
+            <p class="a">→ 「GaN」と書いてあっても、制御・保護回路・発熱設計はメーカーで差が出ます。</p>
+          </div>
+          <div class="item">
+            <p class="q">③ 発熱がゼロになるわけではない</p>
+            <p class="a">→ 高出力運用や複数ポート同時使用では、GaNでも熱くなることがあります。</p>
+          </div>
+          <div class="item">
+            <p class="q">④ 用途によってはオーバースペック</p>
+            <p class="a">→ スマホだけ運用なら、必ずしもGaNが最適とは限りません（サイズより価格重視もアリ）。</p>
+          </div>
+        </section>
+
+        <div class="callout warn">
+          <strong>「GaN＝高性能」ではなく、用途に合う設計かどうか</strong>が重要です。<br/>
+          とくに<strong>出力・PPS対応・ポート数</strong>を見て選ぶのが失敗しにくいです。
+        </div>
+
+        <h2 style="margin-top:18px;">GaNが向いている人（2つ以上でおすすめ）</h2>
+        <ul class="checks">
+          <li>ノートPCとスマホを1つの充電器で回したい</li>
+          <li>持ち運びが多く、できるだけ小型にしたい</li>
+          <li>コンセント周りをスッキリさせたい</li>
+          <li>高出力（例：65W以上）を安定して使いたい</li>
+          <li>安全性やメーカー信頼を重視したい（日本製で絞りたい等）</li>
+        </ul>
+
+        <h2 style="margin-top:18px;">選び方のポイント（結局ここ）</h2>
+        <p>
+          GaNを選ぶかどうかより、先に見るべきポイントは次です：
+        </p>
+        <ul>
+          <li><strong>最大出力(W)</strong>（PC用途なら重要）</li>
+          <li><strong>PPS対応</strong>（スマホの発熱・効率を重視するなら）</li>
+          <li><strong>ポート構成</strong>（USB-C何口 / USB-A有無）</li>
+          <li><strong>サイズ・重量</strong>（持ち運びの快適さ）</li>
+          <li><strong>日本製などの条件</strong>（こだわりがある人向け）</li>
+        </ul>
+
+        <h2 style="margin-top:18px;">次にやること：条件別に比較して候補を絞る</h2>
+        <p>
+          仕様を1つずつ商品ページで確認するのは大変なので、
+          <code class="k">GaN</code> / <code class="k">PPS</code> / <code class="k">出力</code> / <code class="k">日本製</code>などで絞り込みできる比較ページを用意しています。
+          <strong>まずは比較ページで候補を絞る</strong>のが最短です。
+        </p>
+        <p class="note">※この記事は「理解→比較」への導線用ページです。購入リンクは比較ページ側で確認してください。</p>
+      </article>
+
+      <!-- 右：CTA -->
+      <aside class="card cta">
+        <h2>▶ 比較ページへ</h2>
+        <p class="note">
+          GaN/PPS/出力/ポート数/価格/日本製で絞り込み。<br/>
+          迷ったらここから。
+        </p>
+
+        <!-- ★あなたの比較サイト（index）へ -->
+        <a class="btn" href="/affiliate-site/#products" aria-label="GaN対応ACアダプターを比較する">
+          GaN対応ACアダプターを比較する
+          <small>（一覧・絞り込み）</small>
+        </a>
+
+        <a class="subbtn" href="#top" onclick="window.scrollTo({top:0,behavior:'smooth'}); return false;">
+          この記事の先頭へ戻る
+        </a>
+
+        <div class="callout" style="margin-top:6px;">
+          <strong>おすすめの絞り方</strong><br/>
+          まずは <code class="k">出力</code> と <code class="k">PPS</code> → 次に <code class="k">日本製</code>。
+        </div>
+      </aside>
+    </main>
+
+    <footer>
+      <div>© Good for life / ACアダプター比較</div>
+      <div class="note">※価格・仕様は変更されることがあります。購入前に公式/販売ページをご確認ください。</div>
+    </footer>
+  </div>
+</body>
+</html>
