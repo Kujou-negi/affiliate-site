@@ -508,9 +508,12 @@
     border: 0 !important;
   }
 }
-
-
-
+.recommend,
+.recommend-score,
+.score,
+.rating {
+  display: none !important;
+}
   </style>
 
   <!-- ✅ 構造化データ（WebSite）: JSONだけ（JSは絶対混ぜない） -->
@@ -843,7 +846,6 @@
         <div class="title">${escapeHtml(it.product_name || '')}</div>
         <div class="meta">
           <div class="price">¥${it.price ? it.price.toLocaleString() : 'ー'}</div>
-          <div style="margin-left:auto">おすすめ度 ${it.personal_rating || 0} / スコア ${scoreText}</div>
         </div>
         <div class="specline">${escapeHtml(spec)}</div>
         <div class="notes">${escapeHtml(it.notes || '')}</div>
