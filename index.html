@@ -236,6 +236,37 @@
         box-sizing:border-box;
       }
     }
+    @media (max-width: 600px){
+  html, body{
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  /* 全体の横幅をスマホ幅100%に */
+  .container, main, header, section{
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  /* 余白をスマホ向けに調整（好みで 10〜14px） */
+  .container{
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
+
+  /* grid/flexが原因で余るケースの保険 */
+  .grid, .row, .filters-grid, .controls-grid{
+    grid-template-columns: 1fr !important;
+  }
+
+  /* flex子要素がはみ出して横スクロール→余白っぽく見えるの防止 */
+  *{
+    min-width: 0;
+  }
+}
+
 
     /* ===== TOP3だけ表示（確定・最強版）===== */
     #ranking > .rank-item:nth-of-type(n+4){
@@ -307,6 +338,179 @@
         height: 64px !important;
       }
     }
+    @media (max-width: 600px){
+     .tag-title,
+     #tagArea{
+    display: none !important;
+  }
+}
+  /* カテゴリボタン一覧本体 */
+  #categories{
+    display: none !important;
+  }
+
+@media (max-width: 600px){
+  /* サイドバー内の「カテゴリ」見出しを消す */
+  aside.sidebar h3{
+    display: none !important;
+  }
+}
+@media (max-width: 600px){
+  /* 商品一覧を2列に */
+  #grid.grid{
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+  }
+
+  /* カード内の余白を少し詰める（2列向け） */
+  article.card{
+    border-radius: 14px;
+  }
+
+  /* 画像の高さがデカすぎると2列が崩れるので調整 */
+  .card img{
+    height: 140px !important;   /* 好みで 120〜160 */
+    object-fit: contain;
+  }
+
+  /* ボタンを少し薄く（縦が長くなりすぎるの防止） */
+  .card .btn,
+  .card a.btn,
+  .card button.btn{
+    padding: 10px 10px !important;
+    font-size: 14px !important;
+  }
+}
+@media (max-width: 600px){
+  /* 商品名を2行までにして高さを揃える */
+  .card h4, .card .title{
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+@media (max-width: 600px){
+
+  /* 迷ったらこの3つ 全体をコンパクトに */
+  #ranking{
+    padding: 10px !important;
+    margin-bottom: 12px !important;
+  }
+
+  /* 各ランキングカード */
+  #ranking .card{
+    padding: 8px !important;
+    gap: 8px !important;
+  }
+
+  /* ランキング画像を少し小さく */
+  #ranking img{
+    width: 64px !important;
+    height: 64px !important;
+    object-fit: contain;
+  }
+
+  /* タイトル文字を詰める */
+  #ranking h4{
+    font-size: 14px !important;
+    line-height: 1.3 !important;
+  }
+
+  /* スコア行を少し小さく */
+  #ranking .score{
+    font-size: 12px !important;
+  }
+}
+@media (max-width: 600px){
+
+  /* チェック群（PPS/PSE/GaN/折りたたみ/PD/日本製）を3行で止める */
+  .top-controls .checks{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    max-height: 110px;   /* 3行ぶん（合わなければ 96〜120 で調整） */
+    overflow: hidden;
+  }
+
+  /* チェック（ピル）を少しコンパクトにして3行に収めやすくする */
+  .top-controls .checks label,
+  .top-controls .checks .check,
+  .top-controls .checks .pill,
+  .top-controls .checks button{
+    font-size: 12px !important;
+    padding: 6px 10px !important;
+    border-radius: 999px;
+  }
+}
+@media (max-width: 600px){
+  .top-controls .checks{
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 2列 */
+    gap: 8px;
+
+    max-height: 140px; /* 2列×3行 */
+    overflow: hidden;
+  }
+
+  .top-controls .checks .chk{
+    font-size: 12px;
+    padding: 6px 8px;
+  }
+}
+@media (max-width: 600px){
+
+  /* top-controls 自体を縦積みに固定（既存flexを無効化） */
+  .top-controls{
+    display: block !important;
+  }
+
+  /* チェック群：2列×3行で固定 */
+  .top-controls .checks{
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 8px !important;
+
+    max-height: 160px !important;  /* 2列×3行 */
+    overflow: hidden !important;
+  }
+
+  /* label が横いっぱいを取って1列になるのを防ぐ */
+  .top-controls .checks > .chk{
+    display: flex !important;
+    align-items: center !important;
+    width: auto !important;
+    margin: 0 !important;
+
+    font-size: 12px !important;
+    padding: 6px 8px !important;
+  }
+
+  /* もし .chk に grid-column: 1 / -1 が入ってたら潰す */
+  .top-controls .checks > .chk{
+    grid-column: auto !important;
+  }
+}
+@media (max-width: 600px){
+
+  /* 変な区切り線（hrやボーダー）をスマホで消す */
+  hr{
+    display: none !important;
+  }
+
+  /* サイドバー内の線（2重線になってるやつ）をまとめて消す */
+  aside.sidebar hr,
+  aside.sidebar .divider,
+  aside.sidebar .rule{
+    display: none !important;
+    border: 0 !important;
+  }
+}
+
+
+
   </style>
 
   <!-- ✅ 構造化データ（WebSite）: JSONだけ（JSは絶対混ぜない） -->
@@ -376,7 +580,7 @@
       <option value="2">2+</option>
       <option value="3">3+</option>
     </select>
-
+  <div class="checks">
     <label class="chk">
       <input type="checkbox" id="ppsOnly">
       急速充電（PPS）
@@ -406,8 +610,8 @@
       PD対応
       <span class="info" data-tip="USB Power Delivery対応。iPhone/iPad/ノートPCなど幅広く高速充電しやすい規格です。">！</span>
     </label>
-
     <label class="chk"><input type="checkbox" id="jpOnly" /> 日本製のみ</label>
+  </div>
   </div>
 
   <div class="layout">
@@ -417,14 +621,13 @@
 
       <hr style="margin:14px 0;border:none;border-top:1px solid var(--line)">
 
-      <h3>カテゴリ（クリックで絞り込み）</h3>
+      <h3>カテゴリ</h3>
       <div id="categories" class="category-list"></div>
 
       <hr style="margin:14px 0;border:none;border-top:1px solid var(--line)">
 
-      <h3>タグ</h3>
+      <h3 class="tag-title">タグ</h3>
       <div id="tagArea" class="pill-area"></div>
-
       <hr style="margin:14px 0;border:none;border-top:1px solid var(--line)">
 
       <div class="small"></div>
