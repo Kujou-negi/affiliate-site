@@ -1,45 +1,49 @@
 <!doctype html>
 <html lang="ja">
-<head><meta name="google-site-verification" content="IIexcm8XbBbxEoYTEdwaul2C43b2IltXypEiB40UbRY" />
+<head>
+  <meta name="google-site-verification" content="IIexcm8XbBbxEoYTEdwaul2C43b2IltXypEiB40UbRY" />
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Good for life | ACアダプター比較サイト</title>
+  <title>ACアダプター比較サイト Good for life</title>
   <meta name="description" id="metaDesc" content="USB-C充電器を出力・PPS・GaN・折プラグ・ポート数で絞り込み、Amazonと楽天で価格比較できます。" />
 
   <style>
-   :root{
-  --bg:#0b0f14;
-  --panel:#0f1621;
-  --card:#0f1724;
-  --primary:#e6edf6;
-  --muted:#9fb1c5;
-  --line:rgba(130,170,210,0.18);
-  --accent:#2b55ff;     /* サイバーな水色 */
-  --accent2:#ffb020;    /* 警告/ポイント用 */
-  --shadow: 0 10px 30px rgba(0,0,0,0.45);
-}
-body{background:linear-gradient(180deg,#070a0f 0%, var(--bg) 40%, #070a0f 100%); color:var(--primary);}
+    :root{
+      --bg:#0b0f14;
+      --panel:#0f1621;
+      --card:#0f1724;
+      --primary:#e6edf6;
+      --muted:#9fb1c5;
+      --line:rgba(130,170,210,0.18);
+      --accent:#2b55ff;
+      --accent2:#ffb020;
+      --shadow: 0 10px 30px rgba(0,0,0,0.45);
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: Inter, system-ui, Arial;
+      background:linear-gradient(180deg,#070a0f 0%, var(--bg) 40%, #070a0f 100%);
+      color:var(--primary);
+      overflow-x:hidden;
+    }
 
     header{
-   background:
-    radial-gradient(1200px 360px at 20% 10%, rgba(43,220,255,0.18), transparent 55%),
-    radial-gradient(900px 320px at 80% 0%, rgba(255,176,32,0.12), transparent 55%),
-    linear-gradient(180deg, rgba(8,12,18,0.98), rgba(12,18,28,0.92));
-  border-bottom:1px solid var(--line);
-  }
-  header h1{
-  letter-spacing:1.2px;
-  text-transform:uppercase;
-  }   
-  header .cta{
-   background:linear-gradient(90deg, var(--accent), rgba(43,220,255,0.55));
-   color:#001018;
-   border:1px solid rgba(43,220,255,0.55);
-   box-shadow:0 10px 24px rgba(43,220,255,0.12);
-  }
-#breadcrumbs{color:rgba(230,237,246,0.75)}
-
-    #breadcrumbs{margin-top:8px;font-size:0.9rem;opacity:0.85}
+      background:
+        radial-gradient(1200px 360px at 20% 10%, rgba(43,220,255,0.18), transparent 55%),
+        radial-gradient(900px 320px at 80% 0%, rgba(255,176,32,0.12), transparent 55%),
+        linear-gradient(180deg, rgba(8,12,18,0.98), rgba(12,18,28,0.92));
+      border-bottom:1px solid var(--line);
+    }
+    header .wrap{max-width:1200px;margin:0 auto;padding:18px 16px}
+    header h1{
+      letter-spacing:1.2px;
+      text-transform:uppercase;
+      margin:0;
+    }
+    #breadcrumbs{margin-top:8px;font-size:0.9rem;opacity:0.85;color:rgba(230,237,246,0.75)}
+    .status{margin:10px 0 0;color:var(--muted);font-size:0.9rem}
 
     .container{max-width:1200px;margin:22px auto;padding:0 16px}
     .top-controls{
@@ -48,18 +52,43 @@ body{background:linear-gradient(180deg,#070a0f 0%, var(--bg) 40%, #070a0f 100%);
       box-shadow:0 6px 18px rgba(8,20,12,0.04)
     }
     .search{flex:1;min-width:220px}
-    input[type=search]{width:100%;padding:10px;border-radius:8px;border:1px solid var(--line)}
-    .select, .btn{padding:10px 12px;border-radius:8px;border:1px solid var(--line);background:white}
-    .chk{
-      background:rgba(43,220,255,0.06);
-     border:1px solid rgba(43,220,255,0.16);
-     color:var(--primary);
-    }
-    .chk input[type="checkbox"]{
-     width:15px;height:15px;
-     accent-color: var(--accent);
+
+    input[type=search]{
+      width:100%;
+      padding:10px;
+      border-radius:8px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,0.06);
+      color:var(--primary);
+      outline:none;
     }
 
+    /* ★ダークテーマに統一（白すぎ問題の修正） */
+    .select, .btn{
+      padding:10px 12px;
+      border-radius:8px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,0.06);
+      color:var(--primary);
+      outline:none;
+    }
+    .select option{color:#111} /* OSによっては必要 */
+
+    .chk{
+      background:rgba(43,220,255,0.06);
+      border:1px solid rgba(43,220,255,0.16);
+      color:var(--primary);
+      padding:8px 10px;
+      border-radius:10px;
+      display:inline-flex;
+      gap:6px;
+      align-items:center;
+      user-select:none;
+    }
+    .chk input[type="checkbox"]{
+      width:15px;height:15px;
+      accent-color: var(--accent);
+    }
 
     .layout{
       display:grid;
@@ -74,11 +103,22 @@ body{background:linear-gradient(180deg,#070a0f 0%, var(--bg) 40%, #070a0f 100%);
     }
     .sidebar h3{margin:0 0 10px}
     .small{font-size:0.85rem;color:var(--muted);line-height:1.5}
+
     .category-list button{
-      display:block;width:100%;text-align:left;padding:8px;border-radius:8px;border:none;
-      background:transparent;cursor:pointer;color:#222
+      display:block;width:100%;
+      text-align:left;padding:10px 12px;border-radius:10px;
+      border:1px solid rgba(255,255,255,0.08);
+      background:rgba(255,255,255,0.04);
+      cursor:pointer;
+      color:rgba(255,255,255,0.92);
+      font-weight:600;
     }
-    .category-list button:hover{background:rgba(212,175,55,0.12)}
+    .category-list button:hover{background:rgba(255,255,255,0.08)}
+    #categories button.active{
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.25);
+    }
+
     .pill-area{display:flex;flex-wrap:wrap;gap:6px}
     .pill{
       padding:5px 10px;border-radius:999px;border:1px solid rgba(212,175,55,0.35);
@@ -103,13 +143,18 @@ body{background:linear-gradient(180deg,#070a0f 0%, var(--bg) 40%, #070a0f 100%);
     .card img{
       width:100%;height:210px;object-fit:contain;background:#fff;border-bottom:1px solid var(--line)
     }
-    .card-body{padding:12px;display:flex;flex-direction:column;gap:8px}
+    .card-body{padding:12px;display:flex;flex-direction:column;gap:8px;flex:1}
     .title{font-weight:900;margin:0}
     .meta{display:flex;gap:8px;align-items:center;font-size:0.9rem;color:var(--muted)}
     .price{color:var(--primary);font-weight:900}
-    .specline{font-size:0.9rem;color:#333;background:rgba(0,0,0,0.03);padding:8px;border-radius:10px}
-    .notes{font-size:0.92rem;color:#222;line-height:1.45}
-    .buy-row{display:flex;gap:8px;margin-top:6px}
+    .specline{
+      font-size:0.9rem;
+      color:rgba(255,255,255,0.92);
+      background:rgba(255,255,255,0.06);
+      padding:8px;border-radius:10px
+    }
+    .notes{font-size:0.92rem;color:rgba(255,255,255,0.85);line-height:1.45}
+    .buy-row{display:flex;gap:8px;margin-top:auto}
     .buy{
       flex:1;padding:9px 10px;border-radius:10px;text-align:center;text-decoration:none;
       font-weight:900;display:inline-flex;justify-content:center;align-items:center
@@ -118,33 +163,26 @@ body{background:linear-gradient(180deg,#070a0f 0%, var(--bg) 40%, #070a0f 100%);
     .buy.rakuten{background:#e60012;color:white}
     .buy:active{transform:translateY(1px)}
     footer{text-align:center;color:var(--muted);margin:28px 0;line-height:1.6}
-    .status{margin:10px 0 0;color:var(--muted);font-size:0.9rem}
 
     /* ----------------- 🛈 ツールチップ（data-tip方式） ----------------- */
-    /* 小さめ ! アイコン */
     .info{
-     position: relative;
-     display: inline-flex;
-     align-items: center;
-     justify-content: center;
-
-     width: 12px;
-     height: 12px;
-     border-radius: 999px;
-
-     border: 1px solid rgba(0, 0, 0, 0.35);
-     background:rgba(255, 255, 255, 0.849);
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 12px;
+      height: 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(0, 0, 0, 0.35);
+      background:rgba(255, 255, 255, 0.85);
       color: var(--accent);
- 
       font-size: 9px;
-     font-weight: 900;
-     line-height: 1;
-
-     cursor: help;
-     user-select: none;
-     margin-left: 6px;
+      font-weight: 900;
+      line-height: 1;
+      cursor: help;
+      user-select: none;
+      margin-left: 6px;
     }
-
     .info::after{
       content: attr(data-tip);
       position: absolute;
@@ -159,7 +197,6 @@ body{background:linear-gradient(180deg,#070a0f 0%, var(--bg) 40%, #070a0f 100%);
       font-size: 12px;
       line-height: 1.5;
       text-align: left;
-
       opacity: 0;
       visibility: hidden;
       pointer-events: none;
@@ -174,7 +211,6 @@ body{background:linear-gradient(180deg,#070a0f 0%, var(--bg) 40%, #070a0f 100%);
       transform: translateX(-50%);
       border: 6px solid transparent;
       border-top-color: rgba(20,20,20,0.95);
-
       opacity: 0;
       visibility: hidden;
       pointer-events: none;
@@ -187,18 +223,98 @@ body{background:linear-gradient(180deg,#070a0f 0%, var(--bg) 40%, #070a0f 100%);
       visibility: visible;
     }
     .info:hover{
-     background:rgba(0, 0, 0, 0.18);
-     border-color:rgba(87, 231, 20, 0.934);
+      background:rgba(0, 0, 0, 0.18);
+      border-color:rgba(87, 231, 20, 0.934);
     }
 
+    /* ===== Mobile fix ===== */
+    @media (max-width: 600px){
+      *{ max-width:100%; }
+      input, select, textarea{
+        max-width:100%;
+        width:100%;
+        box-sizing:border-box;
+      }
+    }
+
+    /* ===== TOP3だけ表示（確定・最強版）===== */
+    #ranking > .rank-item:nth-of-type(n+4){
+      display: none !important;
+    }
+
+    /* ===== 商品カード内の「Amazonで価格を見る」を下に揃える ===== */
+    article.card .buy-row{ margin-top:auto; }
+
+    /* ===== カテゴリをコンパクトに（2列・高さ削減） ===== */
+    #categories.category-list{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      padding: 12px;
+    }
+    #categories.category-list button{
+      padding: 10px 10px;
+      font-size: 14px;
+      line-height: 1.1;
+      border-radius: 10px;
+    }
+    @media (max-width: 480px){
+      #categories.category-list{
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ===== サイトタイトル強化 ===== */
+    .site-title{
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 800;
+      letter-spacing: 0.04em;
+    }
+    .site-subtitle{
+      margin-top: 6px;
+      font-size: 14px;
+      letter-spacing: 0.12em;
+      color: rgba(255,255,255,0.75);
+    }
+
+    /* ===== TOP10（#ranking）を横並びに固定 ===== */
+    #ranking{
+      display: grid !important;
+      gap: 12px !important;
+    }
+    #ranking .rank-item{
+      display: grid !important;
+      grid-template-columns: 44px 84px 1fr !important;
+      gap: 12px !important;
+      align-items: center !important;
+      padding: 12px !important;
+      border-radius: 16px !important;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    #ranking .rank-item img{
+      width: 84px !important;
+      height: 84px !important;
+      object-fit: cover;
+      border-radius: 16px;
+    }
+    @media (max-width: 420px){
+      #ranking .rank-item{
+        grid-template-columns: 40px 64px 1fr !important;
+      }
+      #ranking .rank-item img{
+        width: 64px !important;
+        height: 64px !important;
+      }
+    }
   </style>
 
-  <!-- 構造化データ（WebSite）: JSONのみ（CSSを絶対混ぜない） -->
+  <!-- ✅ 構造化データ（WebSite）: JSONだけ（JSは絶対混ぜない） -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "name": "Good for life | ACアダプター比較サイト",
+    "name": "ACアダプター比較サイト Good for life",
     "url": "https://example.com",
     "potentialAction": {
       "@type": "SearchAction",
@@ -214,10 +330,9 @@ body{background:linear-gradient(180deg,#070a0f 0%, var(--bg) 40%, #070a0f 100%);
 <body>
 <header>
   <div class="wrap">
-    <h1 id="mainTitle">Good for life | ACアダプター比較サイト</h1>
+    <h1 id="mainTitle" class="site-title">ACアダプター比較サイト Good for life</h1>
     <div id="breadcrumbs"></div>
-    <p><br></p>
-    <a class="cta" href="#products">商品を見る</a>
+    <p class="site-subtitle"></p>
     <div id="status" class="status"></div>
   </div>
 </header>
@@ -249,7 +364,7 @@ body{background:linear-gradient(180deg,#070a0f 0%, var(--bg) 40%, #070a0f 100%);
     </select>
 
     <select id="minW" class="select">
-      <option value="0">出力: 指定なし</option>
+      <option value="0">出力: すべて</option>
       <option value="20-45">20–45W（スマホ向け）</option>
       <option value="45-100">45–100W（PC/タブレット向け）</option>
       <option value="100+">100W以上（高出力）</option>
@@ -297,7 +412,7 @@ body{background:linear-gradient(180deg,#070a0f 0%, var(--bg) 40%, #070a0f 100%);
 
   <div class="layout">
     <aside class="sidebar">
-      <h3>おすすめTOP 10</h3>
+      <h3>おすすめ（迷ったらこの3つ）</h3>
       <div id="ranking" class="ranking"></div>
 
       <hr style="margin:14px 0;border:none;border-top:1px solid var(--line)">
@@ -312,12 +427,7 @@ body{background:linear-gradient(180deg,#070a0f 0%, var(--bg) 40%, #070a0f 100%);
 
       <hr style="margin:14px 0;border:none;border-top:1px solid var(--line)">
 
-      <div class="small">
-        <b></b><br>
-        <br><br>
-        <b></b><br>
-        
-      </div>
+      <div class="small"></div>
     </aside>
 
     <section id="products">
@@ -419,7 +529,6 @@ body{background:linear-gradient(180deg,#070a0f 0%, var(--bg) 40%, #070a0f 100%);
           .replace(/[^a-z0-9]+/g,'_').replace(/^_+|_+$/g,'');
         x.product_id = base || ('item_' + Math.random().toString(36).slice(2,8));
       }
-
       return x;
     });
   }
@@ -525,7 +634,7 @@ body{background:linear-gradient(180deg,#070a0f 0%, var(--bg) 40%, #070a0f 100%);
       const spec = specParts.join(' / ') || '—';
 
       const score = recommendScore(it);
-      const scoreText = score ? score.toFixed(1) : '0.0';
+      const scoreText = Number.isFinite(score) ? score.toFixed(1) : '0.0';
 
       body.innerHTML = `
         <div class="title">${escapeHtml(it.product_name || '')}</div>
@@ -576,6 +685,10 @@ body{background:linear-gradient(180deg,#070a0f 0%, var(--bg) 40%, #070a0f 100%);
       const el = document.createElement('div');
       el.className = 'rank-item';
 
+      // ✅ クリック遷移用URLをdatasetに埋める（Amazon優先 → 楽天）
+      const jump = it.amazon_link || it.rakuten_link || '';
+      if (jump) el.dataset.link = jump;
+
       const num = document.createElement('div');
       num.className = 'num';
       num.textContent = `#${i+1}`;
@@ -614,25 +727,7 @@ body{background:linear-gradient(180deg,#070a0f 0%, var(--bg) 40%, #070a0f 100%);
     });
   }
 
-  function buildCategoryButtons(){
-    const catDiv = document.getElementById('categories');
-    catDiv.innerHTML = '';
-
-    const makeBtn = (label, value) => {
-      const b = document.createElement('button');
-      b.textContent = label;
-      b.onclick = ()=>{
-        const sel = document.getElementById('categorySel');
-        if(sel) sel.value = value;
-        applyFilters();
-      };
-      catDiv.appendChild(b);
-    };
-
-    makeBtn('すべて', 'all');
-    FIXED_CATS.forEach(c => makeBtn(c, c));
-  }
-
+  // ---------- tags ----------
   function generateTags(items){
     const tagSet = new Set();
     items.forEach(it=>{
@@ -667,6 +762,7 @@ body{background:linear-gradient(180deg,#070a0f 0%, var(--bg) 40%, #070a0f 100%);
     });
   }
 
+  // ---------- breadcrumbs + SEO ----------
   function updateBreadcrumbs(cat){
     const bc = document.getElementById('breadcrumbs');
     let text = '';
@@ -691,11 +787,11 @@ body{background:linear-gradient(180deg,#070a0f 0%, var(--bg) 40%, #070a0f 100%);
     const meta = document.getElementById('metaDesc');
 
     if(cat && cat !== 'all'){
-      titleEl.textContent = `Good for life | ACアダプター比較サイト - ${cat}`;
+      titleEl.textContent = `ACアダプター比較サイト Good for life - ${cat}`;
       meta.content = `USB-C充電器を「${cat}」で絞り込み、Amazonと楽天で価格比較できます。`;
       document.title = titleEl.textContent;
     }else{
-      titleEl.textContent = 'Good for life | ACアダプター比較サイト';
+      titleEl.textContent = 'ACアダプター比較サイト Good for life';
       meta.content = 'USB-C充電器を出力・PPS・GaN・折プラグ・ポート数で絞り込み、Amazonと楽天で価格比較できます。';
       document.title = titleEl.textContent;
     }
@@ -797,6 +893,85 @@ body{background:linear-gradient(180deg,#070a0f 0%, var(--bg) 40%, #070a0f 100%);
     el.addEventListener(ev, fn);
   }
 
+  // ===============================
+  // ✅ カテゴリボタン → フィルター連動（あなたのID対応版）
+  // ===============================
+  function resetFilterUI(){
+    ['ppsOnly','pseOnly','ganOnly','foldOnly','pdOnly','jpOnly'].forEach(id=>{
+      const el = document.getElementById(id);
+      if(el) el.checked = false;
+    });
+    const minW = document.getElementById('minW');
+    if(minW) minW.value = "0";
+    const minC = document.getElementById('minC');
+    if(minC) minC.value = "0";
+  }
+
+  function applyCategoryToFilters(catText){
+    resetFilterUI();
+
+    if(catText.includes('スマホ向け')){
+      document.getElementById('minW').value = "20-45";
+    }
+    if(catText.includes('PC/タブレット向け')){
+      document.getElementById('minW').value = "45-100";
+    }
+    if(catText.includes('100W以上')){
+      document.getElementById('minW').value = "100+";
+    }
+    if(catText.includes('2台以上同時充電')){
+      document.getElementById('minC').value = "2";
+    }
+    if(catText.includes('小型') || catText.includes('GaN')){
+      document.getElementById('ganOnly').checked = true;
+    }
+    if(catText.includes('急速充電') || catText.includes('PPS')){
+      document.getElementById('ppsOnly').checked = true;
+    }
+    if(catText.includes('折りたたみプラグ')){
+      document.getElementById('foldOnly').checked = true;
+    }
+    if(catText.includes('PD対応')){
+      document.getElementById('pdOnly').checked = true;
+    }
+    if(catText.includes('PSE')){
+      document.getElementById('pseOnly').checked = true;
+    }
+
+    applyFilters();
+  }
+
+  function buildCategoryButtons(){
+    const catDiv = document.getElementById('categories');
+    catDiv.innerHTML = '';
+
+    const makeBtn = (label, value) => {
+      const b = document.createElement('button');
+      b.textContent = label;
+
+      b.onclick = ()=>{
+        const sel = document.getElementById('categorySel');
+        if(sel) sel.value = value;
+
+        // active表示
+        catDiv.querySelectorAll('button').forEach(x=>x.classList.remove('active'));
+        b.classList.add('active');
+
+        if(value === 'all'){
+          resetFilterUI();
+          applyFilters();
+        }else{
+          applyCategoryToFilters(label);
+        }
+      };
+
+      catDiv.appendChild(b);
+    };
+
+    makeBtn('すべて', 'all');
+    FIXED_CATS.forEach(c => makeBtn(c, c));
+  }
+
   async function init(){
     try{
       const res = await fetch(DATA_URL, {cache:'no-cache'});
@@ -833,13 +1008,23 @@ body{background:linear-gradient(180deg,#070a0f 0%, var(--bg) 40%, #070a0f 100%);
 
     }catch(e){
       console.error(e);
-      document.getElementById('grid').innerHTML =
-        '<p>データの取得に失敗しました。CSV公開設定とURL、列名が正しいか確認してください。</p>';
+      document.getElementById('grid').innerHTML = '<p></p>';
       document.getElementById('status').textContent = 'エラー: ' + String(e.message || e);
     }
   }
 
   init();
+
+  // ===============================
+  // ✅ TOPランキング：クリックでAmazon/楽天へ（再描画しても確実）
+  // ===============================
+  document.getElementById('ranking').addEventListener('click', (e) => {
+    const item = e.target.closest('.rank-item');
+    if(!item) return;
+    const url = item.dataset.link;
+    if(!url) return;
+    window.open(url, '_blank', 'noopener');
+  });
 </script>
 </body>
 </html>
