@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>ACアダプター比較サイト Good for life</title>
   <meta name="description" id="metaDesc" content="USB-C充電器を出力・PPS・GaN・折プラグ・ポート数で絞り込み、Amazonと楽天で価格比較できます。" />
-
   <style>
     :root{
       --bg:#0b0f14;
@@ -63,7 +62,6 @@
       outline:none;
     }
 
-    /* ★ダークテーマに統一（白すぎ問題の修正） */
     .select, .btn{
       padding:10px 12px;
       border-radius:8px;
@@ -72,7 +70,7 @@
       color:var(--primary);
       outline:none;
     }
-    .select option{color:#111} /* OSによっては必要 */
+    .select option{color:#111}
 
     .chk{
       background:rgba(43,220,255,0.06);
@@ -146,7 +144,6 @@
     .card-body{padding:12px;display:flex;flex-direction:column;gap:8px;flex:1}
     .title{font-weight:900;margin:0}
     .meta{display:flex;gap:8px;align-items:center;font-size:0.9rem;color:var(--muted)}
-    .price{color:var(--primary);font-weight:900}
     .specline{
       font-size:0.9rem;
       color:rgba(255,255,255,0.92);
@@ -164,7 +161,7 @@
     .buy:active{transform:translateY(1px)}
     footer{text-align:center;color:var(--muted);margin:28px 0;line-height:1.6}
 
-    /* ----------------- 🛈 ツールチップ（data-tip方式） ----------------- */
+    /* ----------------- 🛈 ツールチップ ----------------- */
     .info{
       position: relative;
       display: inline-flex;
@@ -222,10 +219,6 @@
       opacity: 1;
       visibility: visible;
     }
-    .info:hover{
-      background:rgba(0, 0, 0, 0.18);
-      border-color:rgba(87, 231, 20, 0.934);
-    }
 
     /* ===== Mobile fix ===== */
     @media (max-width: 600px){
@@ -235,64 +228,26 @@
         width:100%;
         box-sizing:border-box;
       }
+      html, body{
+        width: 100%;
+        overflow-x: hidden;
+      }
+      .container, main, header, section{
+        width: 100% !important;
+        max-width: 100% !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+      }
+      .container{
+        padding-left: 12px !important;
+        padding-right: 12px !important;
+      }
+      *{ min-width: 0; }
     }
-    @media (max-width: 600px){
-  html, body{
-    width: 100%;
-    overflow-x: hidden;
-  }
 
-  /* 全体の横幅をスマホ幅100%に */
-  .container, main, header, section{
-    width: 100% !important;
-    max-width: 100% !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-  }
-
-  /* 余白をスマホ向けに調整（好みで 10〜14px） */
-  .container{
-    padding-left: 12px !important;
-    padding-right: 12px !important;
-  }
-
-  /* grid/flexが原因で余るケースの保険 */
-  .grid, .row, .filters-grid, .controls-grid{
-    grid-template-columns: 1fr !important;
-  }
-
-  /* flex子要素がはみ出して横スクロール→余白っぽく見えるの防止 */
-  *{
-    min-width: 0;
-  }
-}
-
-
-    /* ===== TOP3だけ表示（確定・最強版）===== */
+    /* ===== TOP3だけ表示 ===== */
     #ranking > .rank-item:nth-of-type(n+4){
       display: none !important;
-    }
-
-    /* ===== 商品カード内の「Amazonで価格を見る」を下に揃える ===== */
-    article.card .buy-row{ margin-top:auto; }
-
-    /* ===== カテゴリをコンパクトに（2列・高さ削減） ===== */
-    #categories.category-list{
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-      padding: 12px;
-    }
-    #categories.category-list button{
-      padding: 10px 10px;
-      font-size: 14px;
-      line-height: 1.1;
-      border-radius: 10px;
-    }
-    @media (max-width: 480px){
-      #categories.category-list{
-        grid-template-columns: 1fr;
-      }
     }
 
     /* ===== サイトタイトル強化 ===== */
@@ -304,11 +259,11 @@
     .site-subtitle{
       margin-top: 6px;
       font-size: 14px;
-      letter-spacing: 0.12em;
-      color: rgba(255,255,255,0.75);
+      letter-spacing: 0.06em;
+      color: rgba(255,255,255,0.78);
     }
 
-    /* ===== TOP10（#ranking）を横並びに固定 ===== */
+    /* ===== TOPランキングカード ===== */
     #ranking{
       display: grid !important;
       gap: 12px !important;
@@ -338,185 +293,108 @@
         height: 64px !important;
       }
     }
+
+    /* ===== スマホでタグ非表示 ===== */
     @media (max-width: 600px){
-     .tag-title,
-     #tagArea{
-    display: none !important;
-  }
-}
-  /* カテゴリボタン一覧本体 */
-  #categories{
-    display: none !important;
-  }
+      .tag-title, #tagArea{ display: none !important; }
+    }
 
-@media (max-width: 600px){
-  /* サイドバー内の「カテゴリ」見出しを消す */
-  aside.sidebar h3{
-    display: none !important;
-  }
-}
-@media (max-width: 600px){
-  /* 商品一覧を2列に */
-  #grid.grid{
-    display: grid !important;
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    gap: 10px !important;
-  }
+    /* カテゴリボタン一覧本体（あなたがスマホで消したいので常時OFF） */
+    #categories{ display: none !important; }
 
-  /* カード内の余白を少し詰める（2列向け） */
-  article.card{
-    border-radius: 14px;
-  }
+    @media (max-width: 600px){
+      aside.sidebar h3{ display: none !important; }
+      hr{ display: none !important; }
+    }
 
-  /* 画像の高さがデカすぎると2列が崩れるので調整 */
-  .card img{
-    height: 140px !important;   /* 好みで 120〜160 */
-    object-fit: contain;
-  }
+    /* ===== 商品一覧スマホ2列 ===== */
+    @media (max-width: 600px){
+      #grid.grid{
+        display: grid !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 10px !important;
+      }
+      article.card{ border-radius: 14px; }
+      .card img{
+        height: 140px !important;
+        object-fit: contain;
+      }
+      .card h4, .card .title{
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+    }
 
-  /* ボタンを少し薄く（縦が長くなりすぎるの防止） */
-  .card .btn,
-  .card a.btn,
-  .card button.btn{
-    padding: 10px 10px !important;
-    font-size: 14px !important;
-  }
-}
-@media (max-width: 600px){
-  /* 商品名を2行までにして高さを揃える */
-  .card h4, .card .title{
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-}
-@media (max-width: 600px){
+    .recommend, .recommend-score, .score, .rating { display: none !important; }
 
-  /* 迷ったらこの3つ 全体をコンパクトに */
-  #ranking{
-    padding: 10px !important;
-    margin-bottom: 12px !important;
-  }
+    /* ===== 価格帯（貴金属 4段階） ===== */
+    .price-zone{
+      font-weight:800;
+      padding:6px 10px;
+      border-radius:10px;
+      font-size:14px;
+      margin:6px 0 10px;
+      border:1px solid rgba(255,255,255,0.14);
+      display:flex;
+      align-items:center;
+      gap:8px;
+      min-height:40px;
+    }
+    .zone-bronze{ background: rgba(205,127,50,0.18); color: #ffcf9a; }
+    .zone-silver{ background: rgba(192,192,192,0.14); color: #e7eef7; }
+    .zone-gold{ background: rgba(212,175,55,0.18); color: #ffe28a; }
+    .zone-diamond{ background: rgba(120,210,255,0.16); color: #bfe9ff; }
 
-  /* 各ランキングカード */
-  #ranking .card{
-    padding: 8px !important;
-    gap: 8px !important;
-  }
+    @media (max-width:600px){
+      .price-zone{ min-height:auto; padding:6px 8px; }
+      .price-zone .pz-txt{ display:none; } /* スマホはアイコンだけ */
+    }
 
-  /* ランキング画像を少し小さく */
-  #ranking img{
-    width: 64px !important;
-    height: 64px !important;
-    object-fit: contain;
-  }
+    /* ===== 価格帯凡例 ===== */
+    .price-legend{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      margin-top:10px;
+      font-size:13px;
+    }
+    .legend-item{
+      padding:6px 10px;
+      border-radius:8px;
+      font-weight:800;
+      border:1px solid rgba(255,255,255,0.12);
+    }
+    .legend-item.diamond{ background: rgba(120,210,255,0.16); color:#bfe9ff; }
+    .legend-item.gold{    background: rgba(212,175,55,0.18);  color:#ffe28a; }
+    .legend-item.silver{  background: rgba(192,192,192,0.14); color:#e7eef7; }
+    .legend-item.bronze{  background: rgba(205,127,50,0.18);  color:#ffcf9a; }
+    .legend-note{ color: rgba(230,237,246,0.7); font-size:12px; }
+    @media (max-width:600px){ .legend-note{ display:none; } }
 
-  /* タイトル文字を詰める */
-  #ranking h4{
-    font-size: 14px !important;
-    line-height: 1.3 !important;
-  }
-
-  /* スコア行を少し小さく */
-  #ranking .score{
-    font-size: 12px !important;
-  }
-}
-@media (max-width: 600px){
-
-  /* チェック群（PPS/PSE/GaN/折りたたみ/PD/日本製）を3行で止める */
-  .top-controls .checks{
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-
-    max-height: 110px;   /* 3行ぶん（合わなければ 96〜120 で調整） */
-    overflow: hidden;
-  }
-
-  /* チェック（ピル）を少しコンパクトにして3行に収めやすくする */
-  .top-controls .checks label,
-  .top-controls .checks .check,
-  .top-controls .checks .pill,
-  .top-controls .checks button{
-    font-size: 12px !important;
-    padding: 6px 10px !important;
-    border-radius: 999px;
-  }
-}
-@media (max-width: 600px){
-  .top-controls .checks{
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* 2列 */
-    gap: 8px;
-
-    max-height: 140px; /* 2列×3行 */
-    overflow: hidden;
-  }
-
-  .top-controls .checks .chk{
-    font-size: 12px;
-    padding: 6px 8px;
-  }
-}
-@media (max-width: 600px){
-
-  /* top-controls 自体を縦積みに固定（既存flexを無効化） */
-  .top-controls{
-    display: block !important;
-  }
-
-  /* チェック群：2列×3行で固定 */
-  .top-controls .checks{
-    display: grid !important;
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    gap: 8px !important;
-
-    max-height: 160px !important;  /* 2列×3行 */
-    overflow: hidden !important;
-  }
-
-  /* label が横いっぱいを取って1列になるのを防ぐ */
-  .top-controls .checks > .chk{
-    display: flex !important;
-    align-items: center !important;
-    width: auto !important;
-    margin: 0 !important;
-
-    font-size: 12px !important;
-    padding: 6px 8px !important;
-  }
-
-  /* もし .chk に grid-column: 1 / -1 が入ってたら潰す */
-  .top-controls .checks > .chk{
-    grid-column: auto !important;
-  }
-}
-@media (max-width: 600px){
-
-  /* 変な区切り線（hrやボーダー）をスマホで消す */
-  hr{
-    display: none !important;
-  }
-
-  /* サイドバー内の線（2重線になってるやつ）をまとめて消す */
-  aside.sidebar hr,
-  aside.sidebar .divider,
-  aside.sidebar .rule{
-    display: none !important;
-    border: 0 !important;
-  }
-}
-.recommend,
-.recommend-score,
-.score,
-.rating {
-  display: none !important;
-}
+    /* ===== カード内の高さを揃える ===== */
+    .card .title{
+      line-height: 1.25;
+      min-height: calc(1.25em * 2);
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .card .specline{
+      line-height: 1.35;
+      min-height: calc(1.35em * 2 + 16px);
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .card .buy-row{ margin-top:auto; }
   </style>
 
-  <!-- ✅ 構造化データ（WebSite）: JSONだけ（JSは絶対混ぜない） -->
+  <!-- ✅ 構造化データ（WebSite） -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -530,7 +408,6 @@
     }
   }
   </script>
-
   <script id="breadcrumbLD" type="application/ld+json"></script>
 </head>
 
@@ -539,7 +416,8 @@
   <div class="wrap">
     <h1 id="mainTitle" class="site-title">ACアダプター比較サイト Good for life</h1>
     <div id="breadcrumbs"></div>
-    <p class="site-subtitle"></p>
+    <!-- ✅ サブタイトルにPSE宣言 -->
+    <p class="site-subtitle">掲載商品はすべてPSE技術基準適合</p>
     <div id="status" class="status"></div>
   </div>
 </header>
@@ -550,11 +428,10 @@
 
     <select id="sort" class="select">
       <option value="recommend_desc">おすすめ順</option>
-      <option value="price_asc">価格：安い順</option>
-      <option value="price_desc">価格：高い順</option>
+      <option value="price_asc">価格帯：安い順</option>
+      <option value="price_desc">価格帯：高い順</option>
       <option value="discount_desc">割引率：高い順</option>
       <option value="w_desc">最大W：高い順</option>
-      <option value="weight_asc">重量：軽い順</option>
     </select>
 
     <select id="categorySel" class="select">
@@ -567,6 +444,7 @@
       <option value="急速充電（PPS）">急速充電（PPS）</option>
       <option value="折りたたみプラグ">折りたたみプラグ</option>
       <option value="PD対応">PD対応</option>
+      <!-- PSEカテゴリは残してもいいけど、全件PSEなら外してもOK -->
       <option value="PSE技術基準適合">PSE技術基準適合</option>
     </select>
 
@@ -583,38 +461,42 @@
       <option value="2">2+</option>
       <option value="3">3+</option>
     </select>
-  <div class="checks">
-    <label class="chk">
-      <input type="checkbox" id="ppsOnly">
-      急速充電（PPS）
-      <span class="info" data-tip="Androidの「超急速充電」で必要になることが多い規格。対応していないと最大速度が出ない場合があります。">！</span>
-    </label>
 
-    <label class="chk">
-      <input type="checkbox" id="pseOnly">
-      PSE技術基準適合
-      <span class="info" data-tip="日本の電気用品安全法に基づき、基準を満たした電化製品に表示される安全マーク。">！</span>
-    </label>
+    <div class="checks">
+      <label class="chk">
+        <input type="checkbox" id="ppsOnly">
+        急速充電（PPS）
+        <span class="info" data-tip="Androidの「超急速充電」で必要になることが多い規格。対応していないと最大速度が出ない場合があります。">！</span>
+      </label>
 
-    <label class="chk">
-      <input type="checkbox" id="ganOnly">
-      小型・発熱少（GaN）
-      <span class="info" data-tip="GaN（窒化ガリウム）採用だと、同じ出力でも小型になりやすく、発熱が抑えられやすい傾向があります。">！</span>
-    </label>
+      <label class="chk">
+        <input type="checkbox" id="ganOnly">
+        小型・発熱少（GaN）
+        <span class="info" data-tip="GaN（窒化ガリウム）採用だと、同じ出力でも小型になりやすく、発熱が抑えられやすい傾向があります。">！</span>
+      </label>
 
-    <label class="chk">
-      <input type="checkbox" id="foldOnly">
-      折りたたみプラグ
-      <span class="info" data-tip="プラグが折りたためるタイプ。持ち運びに便利です。">！</span>
-    </label>
+      <label class="chk">
+        <input type="checkbox" id="foldOnly">
+        折りたたみプラグ
+        <span class="info" data-tip="プラグが折りたためるタイプ。持ち運びに便利です。">！</span>
+      </label>
 
-    <label class="chk">
-      <input type="checkbox" id="pdOnly" />
-      PD対応
-      <span class="info" data-tip="USB Power Delivery対応。iPhone/iPad/ノートPCなど幅広く高速充電しやすい規格です。">！</span>
-    </label>
-    <label class="chk"><input type="checkbox" id="jpOnly" /> 日本製のみ</label>
-  </div>
+      <label class="chk">
+        <input type="checkbox" id="pdOnly" />
+        PD対応
+        <span class="info" data-tip="USB Power Delivery対応。iPhone/iPad/ノートPCなど幅広く高速充電しやすい規格です。">！</span>
+      </label>
+
+      <label class="chk"><input type="checkbox" id="jpOnly" /> 日本製のみ</label>
+    </div>
+
+    <div class="price-legend">
+      <span class="legend-item diamond">💎 ダイヤ</span>
+      <span class="legend-item gold">🥇 ゴールド</span>
+      <span class="legend-item silver">🥈 シルバー</span>
+      <span class="legend-item bronze">🥉 ブロンズ</span>
+      <span class="legend-note">※価格は変動します。最新価格は販売ページでご確認ください。</span>
+    </div>
   </div>
 
   <div class="layout">
@@ -667,6 +549,9 @@
   }
   function to01(v){ return String(v ?? '').trim() === '1' ? 1 : 0; }
 
+  // ✅ 価格帯（貴金属）ソート用
+  const priceOrder = { bronze: 1, silver: 2, gold: 3, diamond: 4 };
+
   // robust CSV parser (quotes supported)
   function parseCSV(csv){
     const lines = csv.trim().split(/\r?\n/);
@@ -716,19 +601,22 @@
       x.size_mm = (x.size_mm || '').trim();
       x.multi_output_rule = (x.multi_output_rule || '').trim();
 
-      // 任意列：pse（無い場合は0扱い）
+      // ✅ PSEは必須：列が無い/空でも0扱いになるので、シート側は1固定推奨
       x.pse = to01(x.pse);
 
       x.personal_rating = toNum(x.personal_rating);
       x.review_rating = toNum(x.review_rating);
       x.popularity = toNum(x.popularity);
       x.discount_rate = toNum(x.discount_rate);
-      x.price = toNum(x.price);
+
+      // ✅ price_zone: 貴金属4段階
+      x.price_zone = (x.price_zone || '').trim().toLowerCase();
+      if(!['bronze','silver','gold','diamond'].includes(x.price_zone)) x.price_zone = 'silver';
 
       x.notes = (x.notes || '').trim();
       x.amazon_link = (x.amazon_link || '').trim();
       x.rakuten_link = (x.rakuten_link || '').trim();
-      x.image_url = (x.image_url || '').trim();
+      x.image_url = (x.image_url || x.image_link || '').trim();
 
       if(!x.product_id){
         const base = (x.maker + '_' + x.product_name).toLowerCase()
@@ -764,6 +652,8 @@
     if(it.pps === 1) cats.add(CAT_PPS);
     if(it.plug_fold === 1) cats.add(CAT_FOLD);
     if(it.pd === 1) cats.add(CAT_PD);
+
+    // ✅ 全件PSE前提でも、カテゴリとして残したいならここで付与（pse=1のみ付く）
     if(it.pse === 1) cats.add(CAT_PSE);
 
     if(it.category) cats.add(it.category);
@@ -805,6 +695,21 @@
       .replaceAll("'","&#39;");
   }
 
+  function getPriceIcon(zone){
+    if(zone === "diamond") return "💎";
+    if(zone === "gold") return "🥇";
+    if(zone === "silver") return "🥈";
+    if(zone === "bronze") return "🥉";
+    return "🥈";
+  }
+  function getPriceText(zone){
+    if(zone === "diamond") return "価格帯：ダイヤモンド";
+    if(zone === "gold") return "価格帯：ゴールド";
+    if(zone === "silver") return "価格帯：シルバー";
+    if(zone === "bronze") return "価格帯：ブロンズ";
+    return "価格帯：シルバー";
+  }
+
   function renderGrid(items){
     const grid = document.getElementById('grid');
     grid.innerHTML = '';
@@ -833,20 +738,22 @@
       if(it.pps) specParts.push('PPS');
       if(it.gan) specParts.push('GaN');
       if(it.plug_fold) specParts.push('折プラグ');
-      if(it.pse) specParts.push('PSE');
-      if(it.weight_g) specParts.push(`${it.weight_g}g`);
       if(it.multi_output_rule) specParts.push(it.multi_output_rule);
+
+      // ✅ 重量は表示しない（必要ならここを戻す）
+      // if(it.weight_g) specParts.push(`${it.weight_g}g`);
 
       const spec = specParts.join(' / ') || '—';
 
-      const score = recommendScore(it);
-      const scoreText = Number.isFinite(score) ? score.toFixed(1) : '0.0';
-
       body.innerHTML = `
         <div class="title">${escapeHtml(it.product_name || '')}</div>
-        <div class="meta">
-          <div class="price">¥${it.price ? it.price.toLocaleString() : 'ー'}</div>
+
+        <div class="price-zone zone-${escapeHtml(it.price_zone)}">
+          <span class="pz-ico">${getPriceIcon(it.price_zone)}</span>
+          <span class="pz-txt">${escapeHtml(getPriceText(it.price_zone))}</span>
         </div>
+
+        <div class="meta"></div>
         <div class="specline">${escapeHtml(spec)}</div>
         <div class="notes">${escapeHtml(it.notes || '')}</div>
       `;
@@ -890,7 +797,6 @@
       const el = document.createElement('div');
       el.className = 'rank-item';
 
-      // ✅ クリック遷移用URLをdatasetに埋める（Amazon優先 → 楽天）
       const jump = it.amazon_link || it.rakuten_link || '';
       if (jump) el.dataset.link = jump;
 
@@ -918,7 +824,7 @@
       if(it.pps) specMini.push('PPS');
       if(it.gan) specMini.push('GaN');
       if(it.plug_fold) specMini.push('折');
-      if(it.pse) specMini.push('PSE');
+      // PSEは全件なので表示しない
       sub.textContent = `${specMini.join(' / ') || '—'}  | スコア ${recommendScore(it).toFixed(1)}`;
 
       box.appendChild(name);
@@ -947,8 +853,8 @@
       if(it.pps) tagSet.add('PPS');
       if(it.gan) tagSet.add('GaN');
       if(it.plug_fold) tagSet.add('折プラグ');
-      if(it.pse) tagSet.add('PSE');
       if(it.ports_c >= 2) tagSet.add('USB-C 2+');
+      // ✅ PSEは全件なのでタグにしない
     });
 
     const area = document.getElementById('tagArea');
@@ -1016,6 +922,9 @@
   function applyFilters(){
     let out = data.slice();
 
+    // ✅ 常にPSE適合のみ表示（保険）
+    out = out.filter(i => (i.pse || 0) === 1);
+
     const q = document.getElementById('search').value.trim().toLowerCase();
     const catSel = document.getElementById('categorySel').value;
 
@@ -1025,9 +934,8 @@
 
     const ppsOnly = document.getElementById('ppsOnly').checked;
     const ganOnly = document.getElementById('ganOnly').checked;
-    const foldOnly = document.getElementById('foldOnly').checked;
+    const foldOnly = documento = document.getElementById('foldOnly').checked;
     const pdOnly = document.getElementById('pdOnly').checked;
-    const pseOnly = document.getElementById('pseOnly').checked;
 
     if(q){
       out = out.filter(i=>{
@@ -1046,47 +954,33 @@
 
     out = out.filter(i => matchW((i.max_w || 0), wSel));
 
-    if(minC){
-      out = out.filter(i => (i.ports_c || 0) >= minC);
-    }
-    if(pdOnly){
-      out = out.filter(i => (i.pd || 0) === 1);
-    }
-    if(ppsOnly){
-      out = out.filter(i => (i.pps || 0) === 1);
-    }
-    if(ganOnly){
-      out = out.filter(i => (i.gan || 0) === 1);
-    }
-    if(foldOnly){
-      out = out.filter(i => (i.plug_fold || 0) === 1);
-    }
-    if(pseOnly){
-      out = out.filter(i => (i.pse || 0) === 1);
-    }
+    if(minC) out = out.filter(i => (i.ports_c || 0) >= minC);
+    if(pdOnly) out = out.filter(i => (i.pd || 0) === 1);
+    if(ppsOnly) out = out.filter(i => (i.pps || 0) === 1);
+    if(ganOnly) out = out.filter(i => (i.gan || 0) === 1);
+    if(foldOnly) out = out.filter(i => (i.plug_fold || 0) === 1);
 
     const sort = document.getElementById('sort').value;
+
     if(sort === 'price_asc'){
-      out.sort((a,b)=>(a.price||0)-(b.price||0));
+      out.sort((a,b)=>(priceOrder[a.price_zone]||99)-(priceOrder[b.price_zone]||99));
     }else if(sort === 'price_desc'){
-      out.sort((a,b)=>(b.price||0)-(a.price||0));
+      out.sort((a,b)=>(priceOrder[b.price_zone]||0)-(priceOrder[a.price_zone]||0));
     }else if(sort === 'discount_desc'){
       out.sort((a,b)=>(b.discount_rate||0)-(a.discount_rate||0));
     }else if(sort === 'w_desc'){
       out.sort((a,b)=>(b.max_w||0)-(a.max_w||0));
-    }else if(sort === 'weight_asc'){
-      out.sort((a,b)=>((a.weight_g||999999)-(b.weight_g||999999)));
     }else{
       out.sort((a,b)=>recommendScore(b)-recommendScore(a));
     }
 
     renderGrid(out);
-    renderRanking(out.length ? out : data);
+    renderRanking(out.length ? out : data.filter(i => (i.pse || 0) === 1));
     updateSEO(catSel);
     updateBreadcrumbs(catSel);
 
     document.getElementById('status').textContent =
-      `表示中: ${out.length} 件 / 全 ${data.length} 件`;
+      `表示中: ${out.length} 件 / 全 ${data.filter(i => (i.pse || 0) === 1).length} 件（PSE適合のみ）`;
   }
 
   function on(id, ev, fn){
@@ -1099,10 +993,10 @@
   }
 
   // ===============================
-  // ✅ カテゴリボタン → フィルター連動（あなたのID対応版）
+  // ✅ カテゴリボタン → フィルター連動
   // ===============================
   function resetFilterUI(){
-    ['ppsOnly','pseOnly','ganOnly','foldOnly','pdOnly','jpOnly'].forEach(id=>{
+    ['ppsOnly','ganOnly','foldOnly','pdOnly','jpOnly'].forEach(id=>{
       const el = document.getElementById(id);
       if(el) el.checked = false;
     });
@@ -1115,33 +1009,14 @@
   function applyCategoryToFilters(catText){
     resetFilterUI();
 
-    if(catText.includes('スマホ向け')){
-      document.getElementById('minW').value = "20-45";
-    }
-    if(catText.includes('PC/タブレット向け')){
-      document.getElementById('minW').value = "45-100";
-    }
-    if(catText.includes('100W以上')){
-      document.getElementById('minW').value = "100+";
-    }
-    if(catText.includes('2台以上同時充電')){
-      document.getElementById('minC').value = "2";
-    }
-    if(catText.includes('小型') || catText.includes('GaN')){
-      document.getElementById('ganOnly').checked = true;
-    }
-    if(catText.includes('急速充電') || catText.includes('PPS')){
-      document.getElementById('ppsOnly').checked = true;
-    }
-    if(catText.includes('折りたたみプラグ')){
-      document.getElementById('foldOnly').checked = true;
-    }
-    if(catText.includes('PD対応')){
-      document.getElementById('pdOnly').checked = true;
-    }
-    if(catText.includes('PSE')){
-      document.getElementById('pseOnly').checked = true;
-    }
+    if(catText.includes('スマホ向け')) document.getElementById('minW').value = "20-45";
+    if(catText.includes('PC/タブレット向け')) document.getElementById('minW').value = "45-100";
+    if(catText.includes('100W以上')) document.getElementById('minW').value = "100+";
+    if(catText.includes('2台以上同時充電')) document.getElementById('minC').value = "2";
+    if(catText.includes('小型') || catText.includes('GaN')) document.getElementById('ganOnly').checked = true;
+    if(catText.includes('急速充電') || catText.includes('PPS')) document.getElementById('ppsOnly').checked = true;
+    if(catText.includes('折りたたみプラグ')) document.getElementById('foldOnly').checked = true;
+    if(catText.includes('PD対応')) document.getElementById('pdOnly').checked = true;
 
     applyFilters();
   }
@@ -1158,7 +1033,6 @@
         const sel = document.getElementById('categorySel');
         if(sel) sel.value = value;
 
-        // active表示
         catDiv.querySelectorAll('button').forEach(x=>x.classList.remove('active'));
         b.classList.add('active');
 
@@ -1192,7 +1066,7 @@
       });
 
       buildCategoryButtons();
-      generateTags(data);
+      generateTags(data.filter(i => (i.pse || 0) === 1));
 
       updateSEO('all');
       updateBreadcrumbs('all');
@@ -1207,7 +1081,6 @@
       on('ganOnly','change',applyFilters);
       on('foldOnly','change',applyFilters);
       on('pdOnly','change',applyFilters);
-      on('pseOnly','change',applyFilters);
 
       applyFilters();
 
@@ -1220,9 +1093,7 @@
 
   init();
 
-  // ===============================
-  // ✅ TOPランキング：クリックでAmazon/楽天へ（再描画しても確実）
-  // ===============================
+  // ✅ TOPランキング：クリックでAmazon/楽天へ
   document.getElementById('ranking').addEventListener('click', (e) => {
     const item = e.target.closest('.rank-item');
     if(!item) return;
