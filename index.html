@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>ACアダプター比較サイト Good for life</title>
   <meta name="description" id="metaDesc" content="USB-C充電器を出力・PPS・GaN・折プラグ・ポート数で絞り込み、Amazonと楽天で価格比較できます。" />
+
   <style>
     :root{
       --bg:#0b0f14;
@@ -36,11 +37,6 @@
       border-bottom:1px solid var(--line);
     }
     header .wrap{max-width:1200px;margin:0 auto;padding:18px 16px}
-    header h1{
-      letter-spacing:1.2px;
-      text-transform:uppercase;
-      margin:0;
-    }
     #breadcrumbs{margin-top:8px;font-size:0.9rem;opacity:0.85;color:rgba(230,237,246,0.75)}
     .status{margin:10px 0 0;color:var(--muted);font-size:0.9rem}
 
@@ -102,21 +98,6 @@
     .sidebar h3{margin:0 0 10px}
     .small{font-size:0.85rem;color:var(--muted);line-height:1.5}
 
-    .category-list button{
-      display:block;width:100%;
-      text-align:left;padding:10px 12px;border-radius:10px;
-      border:1px solid rgba(255,255,255,0.08);
-      background:rgba(255,255,255,0.04);
-      cursor:pointer;
-      color:rgba(255,255,255,0.92);
-      font-weight:600;
-    }
-    .category-list button:hover{background:rgba(255,255,255,0.08)}
-    #categories button.active{
-      background: rgba(255,255,255,0.12);
-      border: 1px solid rgba(255,255,255,0.25);
-    }
-
     .pill-area{display:flex;flex-wrap:wrap;gap:6px}
     .pill{
       padding:5px 10px;border-radius:999px;border:1px solid rgba(212,175,55,0.35);
@@ -127,13 +108,19 @@
     .pill.active{background:rgba(212,175,55,0.22);border-color:rgba(212,175,55,0.65);font-weight:800}
 
     .ranking{display:flex;flex-direction:column;gap:10px}
-    .rank-item{display:flex;gap:12px;align-items:center}
+    .rank-item{display:flex;gap:12px;align-items:center;cursor:pointer}
     .rank-item img{width:64px;height:48px;object-fit:contain;border-radius:8px;background:#fff;border:1px solid var(--line)}
     .rank-item .num{width:34px;font-weight:900;color:var(--primary)}
     .rank-item .name{font-weight:900;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
     .rank-item .sub{color:var(--muted);font-size:0.85rem;margin-top:2px}
 
-    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px}
+    /* ===== 商品グリッド：PCは幅で自動変化 ===== */
+    #grid.grid{
+      display:grid !important;
+      grid-template-columns:repeat(auto-fill, minmax(260px, 1fr)) !important;
+      gap:16px !important;
+    }
+
     .card{
       background:var(--card);border-radius:12px;overflow:hidden;border:1px solid var(--line);
       box-shadow:0 6px 18px rgba(8,20,12,0.06);display:flex;flex-direction:column
@@ -143,7 +130,7 @@
     }
     .card-body{padding:12px;display:flex;flex-direction:column;gap:8px;flex:1}
     .title{font-weight:900;margin:0}
-    .meta{display:flex;gap:8px;align-items:center;font-size:0.9rem;color:var(--muted)}
+
     .specline{
       font-size:0.9rem;
       color:rgba(255,255,255,0.92);
@@ -159,7 +146,6 @@
     .buy.amazon{background:#ff9900;color:white}
     .buy.rakuten{background:#e60012;color:white}
     .buy:active{transform:translateY(1px)}
-    footer{text-align:center;color:var(--muted);margin:28px 0;line-height:1.6}
 
     /* ----------------- 🛈 ツールチップ ----------------- */
     .info{
@@ -220,41 +206,15 @@
       visibility: visible;
     }
 
-    /* ===== Mobile fix ===== */
-    @media (max-width: 600px){
-      *{ max-width:100%; }
-      input, select, textarea{
-        max-width:100%;
-        width:100%;
-        box-sizing:border-box;
-      }
-      html, body{
-        width: 100%;
-        overflow-x: hidden;
-      }
-      .container, main, header, section{
-        width: 100% !important;
-        max-width: 100% !important;
-        margin-left: 0 !important;
-        margin-right: 0 !important;
-      }
-      .container{
-        padding-left: 12px !important;
-        padding-right: 12px !important;
-      }
-      *{ min-width: 0; }
-    }
-
     /* ===== TOP3だけ表示 ===== */
-    #ranking > .rank-item:nth-of-type(n+4){
-      display: none !important;
-    }
+    #ranking > .rank-item:nth-of-type(n+4){ display: none !important; }
 
     /* ===== サイトタイトル強化 ===== */
     .site-title{
       font-size: clamp(28px, 4vw, 42px);
       font-weight: 800;
       letter-spacing: 0.04em;
+      margin:0;
     }
     .site-subtitle{
       margin-top: 6px;
@@ -285,13 +245,8 @@
       border-radius: 16px;
     }
     @media (max-width: 420px){
-      #ranking .rank-item{
-        grid-template-columns: 40px 64px 1fr !important;
-      }
-      #ranking .rank-item img{
-        width: 64px !important;
-        height: 64px !important;
-      }
+      #ranking .rank-item{ grid-template-columns: 40px 64px 1fr !important; }
+      #ranking .rank-item img{ width: 64px !important; height: 64px !important; }
     }
 
     /* ===== スマホでタグ非表示 ===== */
@@ -299,32 +254,29 @@
       .tag-title, #tagArea{ display: none !important; }
     }
 
-    /* カテゴリボタン一覧本体（あなたがスマホで消したいので常時OFF） */
+    /* カテゴリボタン一覧本体（スマホで消したい＆今は不要） */
     #categories{ display: none !important; }
 
+    /* ===== スマホ最適化 ===== */
     @media (max-width: 600px){
-      aside.sidebar h3{ display: none !important; }
-      hr{ display: none !important; }
-    }
+      html, body{ width: 100%; overflow-x: hidden; }
+      .container{ max-width:100% !important; padding-left:12px !important; padding-right:12px !important; }
+      *{ min-width:0; }
+      input, select, textarea{ width:100%; }
 
-    /* ===== 商品一覧スマホ2列 ===== */
-    @media (max-width: 600px){
+      /* 商品一覧：スマホ2列固定 */
       #grid.grid{
-        display: grid !important;
         grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
         gap: 10px !important;
       }
-      article.card{ border-radius: 14px; }
-      .card img{
-        height: 140px !important;
-        object-fit: contain;
+      .card img{ height: 140px !important; object-fit: contain; }
+      .card .title{
+        display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
       }
-      .card h4, .card .title{
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-      }
+
+      /* スマホはサイドバー見出し/区切り線を消してコンパクト */
+      aside.sidebar h3{ display:none !important; }
+      hr{ display:none !important; }
     }
 
     .recommend, .recommend-score, .score, .rating { display: none !important; }
@@ -346,8 +298,6 @@
     .zone-silver{ background: rgba(192,192,192,0.14); color: #e7eef7; }
     .zone-gold{ background: rgba(212,175,55,0.18); color: #ffe28a; }
     .zone-diamond{ background: rgba(120,210,255,0.16); color: #bfe9ff; }
-
-
 
     /* ===== 価格帯凡例 ===== */
     .price-legend{
@@ -389,6 +339,262 @@
       overflow: hidden;
     }
     .card .buy-row{ margin-top:auto; }
+
+.footer-animation {
+  background: #0d1b2a;
+  color: #e0e1dd;
+  padding: 80px 20px;
+  text-align: center;
+  /* フォントをプロ仕様に変更 */
+  font-family: 'Oswald', sans-serif;
+}
+.logo-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 10px;
+}
+
+/* アイコンのデザイン */
+.leaf-plug-icon {
+  width: 60px;
+  height: 60px;
+  fill: none;
+  stroke: #77dd77; /* エコ・グリーン */
+  stroke-width: 4;
+  stroke-linecap: round;
+  filter: drop-shadow(0 0 5px rgba(119, 221, 119, 0.5));
+  animation: pulse-icon 3s infinite ease-in-out;
+}
+
+.footer-title {
+  font-size: 3.5rem;
+  font-weight: 700;
+  letter-spacing: -1px;
+  margin: 0;
+  color: #fff;
+  line-height: 1;
+}
+
+.highlight {
+  color: #4cc9f0; /* 電気的なブルー */
+  margin: 0 5px;
+}
+
+.subtitle {
+  font-size: 0.8rem;
+  letter-spacing: 4px;
+  opacity: 0.6;
+  margin-top: 5px;
+}
+
+/* アニメーション：アイコンが生きているように明滅 */
+@keyframes pulse-icon {
+  0%, 100% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.05); opacity: 1; filter: drop-shadow(0 0 15px #77dd77); }
+}
+
+/* 回路のようなライン */
+.circuit-line {
+  width: 150px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #4cc9f0, transparent);
+  margin: 40px auto 0;
+  position: relative;
+}
+
+.circuit-line::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: 0;
+  width: 5px;
+  height: 5px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #4cc9f0;
+  animation: move-dot 3s infinite linear;
+}
+
+@keyframes move-dot {
+  0% { left: 0; opacity: 0; }
+  50% { opacity: 1; }
+  100% { left: 100%; opacity: 0; }
+}
+
+/* ===== Footer Bar ===== */
+.site-footer{
+  margin-top: 28px;
+  padding: 10px 0;                 /* ← 薄くする */
+  background: rgba(10, 14, 20, 0.75);
+  border-top: 1px solid rgba(130,170,210,0.18);
+  backdrop-filter: blur(10px);
+}
+
+.footer-inner{
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;  /* 左：ロゴ / 右：コピーライト */
+  gap: 12px;
+}
+
+/* ===== Logo ===== */
+.specpilot-logo{
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  user-select: none;
+}
+
+.logo-icon{
+  position: relative;
+  width: 32px;                     /* ← 小さめで引き締め */
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(15, 23, 36, 0.9);
+  border: 1.5px solid rgba(0, 242, 255, 0.75);
+  display: grid;
+  place-items: center;
+  box-shadow: 0 0 12px rgba(0, 242, 255, 0.18);
+  overflow: hidden;
+}
+
+/* 回路っぽい薄い十字 */
+.logo-icon::before,
+.logo-icon::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(to right, transparent 0 48%, rgba(0,242,255,0.22) 50%, transparent 52% 100%),
+    linear-gradient(to bottom, transparent 0 48%, rgba(0,242,255,0.22) 50%, transparent 52% 100%);
+}
+
+.compass-needle{
+  width: 2px;
+  height: 18px;                    /* ← 小さめ */
+  border-radius: 2px;
+  background: linear-gradient(to bottom, #ff4e50 50%, #e6edf6 50%);
+  transform: rotate(45deg);
+  transition: transform 0.55s cubic-bezier(0.68,-0.55,0.27,1.55);
+}
+
+/* テキスト */
+.logo-text{
+  display:flex;
+  flex-direction:column;
+  line-height:1.05;
+}
+
+.site-sub{
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  color: rgba(159,177,197,0.75);
+  font-weight: 700;
+}
+
+.site-main{
+  font-size: 18px;                 /* ← 22→18でフッター薄く */
+  font-weight: 900;
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  color: #e6edf6;
+  letter-spacing: -0.3px;
+}
+
+/* 右側のコピーライトなど */
+.footer-meta{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  color: rgba(159,177,197,0.75);
+  font-size: 12px;
+}
+
+/* hover */
+.specpilot-logo:hover .compass-needle{
+  transform: rotate(225deg);
+}
+
+/* ===== Mobile ===== */
+@media (max-width: 600px){
+  .footer-inner{
+    justify-content: center;        /* スマホは中央寄せ */
+    flex-direction: column;
+    gap: 6px;
+  }
+  .site-footer{ padding: 9px 0; }
+}
+
+
+.site-sub {
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    color: #888;
+    font-weight: bold;
+}
+
+.site-main {
+    font-size: 22px;
+    font-weight: 900;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    color: #ffffff;
+    letter-spacing: -0.5px;
+}
+
+/* ホバー演出（必要あれば） */
+.specpilot-logo:hover .compass-needle {
+    transform: rotate(225deg);
+    transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+    /* ===== ダイヤ（高級）カード演出 ===== */
+    .card.is-diamond{
+      border: 1px solid rgba(120,210,255,0.35) !important;
+      box-shadow:
+        0 10px 30px rgba(0,0,0,0.45),
+        0 0 0 1px rgba(120,210,255,0.12) inset,
+        0 0 24px rgba(120,210,255,0.18);
+      background:
+        radial-gradient(700px 220px at 30% -20%, rgba(120,210,255,0.16), transparent 55%),
+        radial-gradient(500px 240px at 110% 30%, rgba(255,255,255,0.06), transparent 55%),
+        var(--card);
+      transform: translateZ(0);
+    }
+    .card.is-diamond img{
+      background: linear-gradient(180deg, rgba(255,255,255,1), rgba(245,248,255,1));
+    }
+    .card.is-diamond .price-zone{
+      border-color: rgba(120,210,255,0.38) !important;
+      box-shadow: 0 0 14px rgba(120,210,255,0.16);
+    }
+    @media (hover:hover){
+      .card.is-diamond:hover{
+        transform: translateY(-3px);
+        box-shadow:
+          0 14px 36px rgba(0,0,0,0.52),
+          0 0 0 1px rgba(120,210,255,0.16) inset,
+          0 0 34px rgba(120,210,255,0.22);
+      }
+    }
+.site-main{
+  font-size: 18px;
+  font-weight: 900;
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  letter-spacing: -0.3px;
+
+  /* ベース文字色 */
+  color: #e6edf6;
+
+  /* ネオン発光 */
+  text-shadow:
+    0 0 4px rgba(0,242,255,0.8),
+    0 0 8px rgba(0,242,255,0.6),
+    0 0
+
   </style>
 
   <!-- ✅ 構造化データ（WebSite） -->
@@ -413,8 +619,7 @@
   <div class="wrap">
     <h1 id="mainTitle" class="site-title">ACアダプター比較サイト Good for life</h1>
     <div id="breadcrumbs"></div>
-    <!-- ✅ サブタイトルにPSE宣言 -->
-    <p class="site-subtitle">PSE技術基準適合のみ掲載</p>
+    <p class="site-subtitle">日本の「電気用品安全法」に基づいたPSEマーク商品のみ掲載</p>
     <div id="status" class="status"></div>
   </div>
 </header>
@@ -441,8 +646,6 @@
       <option value="急速充電（PPS）">急速充電（PPS）</option>
       <option value="折りたたみプラグ">折りたたみプラグ</option>
       <option value="PD対応">PD対応</option>
-      <!-- PSEカテゴリは残してもいいけど、全件PSEなら外してもOK -->
-      <option value="PSE技術基準適合">PSE技術基準適合</option>
     </select>
 
     <select id="minW" class="select">
@@ -488,13 +691,13 @@
     </div>
 
     <div class="price-legend">
-      <span class="legend-item diamond">💎 ダイヤ</span>
-      <span class="legend-item gold">🥇 ゴールド</span>
-      <span class="legend-item silver">🥈 シルバー</span>
-      <span class="legend-item bronze">🥉 ブロンズ</span>
+      <span class="legend-item bronze">🥉 〜約5,000円</span>
+      <span class="legend-item silver">🥈 〜約10,000円</span>
+      <span class="legend-item gold">🥇 〜約15,000円</span>
+      <span class="legend-item diamond">💎 約15,000円〜</span>
       <span class="legend-note">※価格は変動します。最新価格は販売ページでご確認ください。</span>
     </div>
-  </div>
+  </div><!-- ★ top-controls を確実に閉じる -->
 
   <div class="layout">
     <aside class="sidebar">
@@ -520,14 +723,29 @@
     </section>
   </div>
 </main>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&display=swap" rel="stylesheet">
 
-<footer>
-  <small>
-    スプレッドシートは「ファイル → 共有 → ウェブに公開（CSV）」で公開してください。<br>
-    Amazon / 楽天リンクはそれぞれの列に入れるとボタンが出ます（nofollow付与済み）。
-  </small>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <a class="specpilot-logo" href="#" aria-label="性能主義 SpecPilot">
+      <div class="logo-icon" aria-hidden="true">
+        <div class="compass-needle"></div>
+      </div>
+      <div class="logo-text">
+        <span class="site-sub">性能主義</span>
+        <span class="site-main">SpecPilot</span>
+      </div>
+    </a>
+
+    <div class="footer-meta">
+      <span class="footer-note">© <span id="year"></span> SpecPilot</span>
+    </div>
+  </div>
 </footer>
 
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
 <script>
   // ★あなたのCSV公開URL
   const DATA_URL = `https://docs.google.com/spreadsheets/d/e/2PACX-1vSx4J4JbzBz1OAPZFWEPz7qI010bBmNoZ9xTdBWFfJBlyxng-2GU56n2wGSss8kpilPNe44TzTetQxS/pub?gid=0&single=true&output=csv`;
@@ -594,11 +812,8 @@
       x.pps = to01(x.pps);
       x.gan = to01(x.gan);
       x.plug_fold = to01(x.plug_fold);
-      x.weight_g = toNum(x.weight_g);
-      x.size_mm = (x.size_mm || '').trim();
-      x.multi_output_rule = (x.multi_output_rule || '').trim();
 
-      // ✅ PSEは必須：列が無い/空でも0扱いになるので、シート側は1固定推奨
+      // ✅ PSE列（必須運用：シート側で1固定推奨）
       x.pse = to01(x.pse);
 
       x.personal_rating = toNum(x.personal_rating);
@@ -650,11 +865,10 @@
     if(it.plug_fold === 1) cats.add(CAT_FOLD);
     if(it.pd === 1) cats.add(CAT_PD);
 
-    // ✅ 全件PSE前提でも、カテゴリとして残したいならここで付与（pse=1のみ付く）
+    // PSEをカテゴリとして残すなら
     if(it.pse === 1) cats.add(CAT_PSE);
 
     if(it.category) cats.add(it.category);
-
     return Array.from(cats);
   }
 
@@ -719,6 +933,9 @@
       const card = document.createElement('article');
       card.className = 'card';
 
+      // 💎 diamondだけ高級演出
+      if(it.price_zone === 'diamond') card.classList.add('is-diamond');
+
       const img = document.createElement('img');
       img.src = it.image_url || FALLBACK_IMG;
       img.alt = it.product_name || '';
@@ -735,10 +952,6 @@
       if(it.pps) specParts.push('PPS');
       if(it.gan) specParts.push('GaN');
       if(it.plug_fold) specParts.push('折プラグ');
-      if(it.multi_output_rule) specParts.push(it.multi_output_rule);
-
-      // ✅ 重量は表示しない（必要ならここを戻す）
-      // if(it.weight_g) specParts.push(`${it.weight_g}g`);
 
       const spec = specParts.join(' / ') || '—';
 
@@ -750,7 +963,6 @@
           <span class="pz-txt">${escapeHtml(getPriceText(it.price_zone))}</span>
         </div>
 
-        <div class="meta"></div>
         <div class="specline">${escapeHtml(spec)}</div>
         <div class="notes">${escapeHtml(it.notes || '')}</div>
       `;
@@ -821,7 +1033,6 @@
       if(it.pps) specMini.push('PPS');
       if(it.gan) specMini.push('GaN');
       if(it.plug_fold) specMini.push('折');
-      // PSEは全件なので表示しない
       sub.textContent = `${specMini.join(' / ') || '—'}  | スコア ${recommendScore(it).toFixed(1)}`;
 
       box.appendChild(name);
@@ -835,7 +1046,6 @@
     });
   }
 
-  // ---------- tags ----------
   function generateTags(items){
     const tagSet = new Set();
     items.forEach(it=>{
@@ -851,7 +1061,6 @@
       if(it.gan) tagSet.add('GaN');
       if(it.plug_fold) tagSet.add('折プラグ');
       if(it.ports_c >= 2) tagSet.add('USB-C 2+');
-      // ✅ PSEは全件なのでタグにしない
     });
 
     const area = document.getElementById('tagArea');
@@ -870,7 +1079,6 @@
     });
   }
 
-  // ---------- breadcrumbs + SEO ----------
   function updateBreadcrumbs(cat){
     const bc = document.getElementById('breadcrumbs');
     let text = '';
@@ -931,7 +1139,7 @@
 
     const ppsOnly = document.getElementById('ppsOnly').checked;
     const ganOnly = document.getElementById('ganOnly').checked;
-    const foldOnly = documento = document.getElementById('foldOnly').checked;
+    const foldOnly = document.getElementById('foldOnly').checked; // ← バグ修正
     const pdOnly = document.getElementById('pdOnly').checked;
 
     if(q){
@@ -977,7 +1185,7 @@
     updateBreadcrumbs(catSel);
 
     document.getElementById('status').textContent =
-      `表示中: ${out.length} 件 / 全 ${data.filter(i => (i.pse || 0) === 1).length} 件（PSE適合のみ）`;
+      `表示中: ${out.length} 件 / 全 ${data.filter(i => (i.pse || 0) === 1).length} 件`;
   }
 
   function on(id, ev, fn){
@@ -989,80 +1197,18 @@
     el.addEventListener(ev, fn);
   }
 
-  // ===============================
-  // ✅ カテゴリボタン → フィルター連動
-  // ===============================
-  function resetFilterUI(){
-    ['ppsOnly','ganOnly','foldOnly','pdOnly','jpOnly'].forEach(id=>{
-      const el = document.getElementById(id);
-      if(el) el.checked = false;
-    });
-    const minW = document.getElementById('minW');
-    if(minW) minW.value = "0";
-    const minC = document.getElementById('minC');
-    if(minC) minC.value = "0";
-  }
-
-  function applyCategoryToFilters(catText){
-    resetFilterUI();
-
-    if(catText.includes('スマホ向け')) document.getElementById('minW').value = "20-45";
-    if(catText.includes('PC/タブレット向け')) document.getElementById('minW').value = "45-100";
-    if(catText.includes('100W以上')) document.getElementById('minW').value = "100+";
-    if(catText.includes('2台以上同時充電')) document.getElementById('minC').value = "2";
-    if(catText.includes('小型') || catText.includes('GaN')) document.getElementById('ganOnly').checked = true;
-    if(catText.includes('急速充電') || catText.includes('PPS')) document.getElementById('ppsOnly').checked = true;
-    if(catText.includes('折りたたみプラグ')) document.getElementById('foldOnly').checked = true;
-    if(catText.includes('PD対応')) document.getElementById('pdOnly').checked = true;
-
-    applyFilters();
-  }
-
-  function buildCategoryButtons(){
-    const catDiv = document.getElementById('categories');
-    catDiv.innerHTML = '';
-
-    const makeBtn = (label, value) => {
-      const b = document.createElement('button');
-      b.textContent = label;
-
-      b.onclick = ()=>{
-        const sel = document.getElementById('categorySel');
-        if(sel) sel.value = value;
-
-        catDiv.querySelectorAll('button').forEach(x=>x.classList.remove('active'));
-        b.classList.add('active');
-
-        if(value === 'all'){
-          resetFilterUI();
-          applyFilters();
-        }else{
-          applyCategoryToFilters(label);
-        }
-      };
-
-      catDiv.appendChild(b);
-    };
-
-    makeBtn('すべて', 'all');
-    FIXED_CATS.forEach(c => makeBtn(c, c));
-  }
-
   async function init(){
     try{
       const res = await fetch(DATA_URL, {cache:'no-cache'});
       if(!res.ok) throw new Error('CSV取得失敗: ' + res.status);
 
       const csv = await res.text();
-      console.log("CSV先頭200文字:", csv.slice(0,200));
-
       const raw = csvToObjects(csv);
       data = raw.map(it=>{
         it._cats = inferCats(it);
         return it;
       });
 
-      buildCategoryButtons();
       generateTags(data.filter(i => (i.pse || 0) === 1));
 
       updateSEO('all');
@@ -1080,10 +1226,9 @@
       on('pdOnly','change',applyFilters);
 
       applyFilters();
-
     }catch(e){
       console.error(e);
-      document.getElementById('grid').innerHTML = '<p></p>';
+      document.getElementById('grid').innerHTML = '<p>データ読み込みに失敗しました。</p>';
       document.getElementById('status').textContent = 'エラー: ' + String(e.message || e);
     }
   }
